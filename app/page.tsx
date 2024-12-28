@@ -31,7 +31,7 @@ export default function Home() {
         {/* Content */}
         <div className="mt-8 flex flex-col items-center text-center md:items-start md:text-left">
           <h1 className="text-4xl font-bold text-zinc-100 sm:text-5xl">
-            Hi, I'm{" "}
+            Hi, I&apos;m
             <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
               Shyam
             </span>
@@ -40,9 +40,9 @@ export default function Home() {
             Full-Stack Engineer
           </h2>
           <p className="mt-4 max-w-lg text-zinc-400">
-            I'm a passionate web developer with expertise in React, Next.js, and
-            modern web technologies. I create elegant, performant, and
-            user-friendly applications that solve real-world problems.
+            I&apos;m a passionate web developer with expertise in React,
+            Next.js, and modern web technologies. I create elegant, performant,
+            and user-friendly applications that solve real-world problems.
           </p>
 
           {/* Social Links */}
