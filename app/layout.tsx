@@ -21,6 +21,11 @@ export default function RootLayout({
       <body
         className={`${inter.className} min-h-screen bg-zinc-950 text-zinc-100`}
       >
+        {/* <DotPattern */}
+        {/*   className={cn( */}
+        {/*     "absolute [mask-image:radial-gradient(300px_circle_at_center,white,transparent)]", */}
+        {/*   )} */}
+        {/* /> */}
         <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <Header />
           <main className="min-h-screen">{children}</main>
