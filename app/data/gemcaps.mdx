@@ -1,0 +1,226 @@
+---
+slug: gemcaps
+title: Gemcaps - Healthcare RCM Platform
+description: A comprehensive healthcare Revenue Cycle Management platform streamlining medical billing, coding, and patient services with advanced automation.
+date: '2025-01-10'
+image: /images/gemcaps-hero.png
+technologies:
+  - Next.js
+  - TypeScript
+  - PostgreSQL
+  - Drizzle ORM 
+  - AWS SNS/SES
+  - shadcn/ui
+githubUrl: https://github.com/yourusername/gemcaps
+liveUrl: https://gemcaps-demo.com
+featured: true
+---
+
+# Gemcaps Healthcare RCM Platform
+
+## Project Overview
+
+Gemcaps is an enterprise-grade healthcare Revenue Cycle Management (RCM) platform that revolutionizes medical practice operations. The platform seamlessly integrates medical coding, billing, and patient management into a unified workflow powered by modern cloud technologies.
+
+## Core Features
+
+### Medical Coding Automation
+
+The platform implements an advanced medical coding system with the following capabilities:
+
+- Real-time ICD-10 and CPT code validation using a comprehensive rules engine
+- Machine learning-powered code suggestions based on clinical documentation
+- Integration with AHIMA certified coding guidelines
+- Automated code review workflow with 98% accuracy validation
+- Custom rules engine for specialty-specific coding requirements
+- Historical coding pattern analysis for optimization
+
+### Billing Management System
+
+The billing module streamlines the entire revenue cycle with:
+
+- Automated claim generation and submission to multiple clearinghouses
+- Real-time payment processing integration with major payment gateways
+- Automated ERA (Electronic Remittance Advice) processing
+- Customizable billing rules and fee schedules
+- Integrated payment plans and automated collections
+- Comprehensive reporting and analytics dashboard
+
+### Patient Services Portal
+
+A feature-rich patient engagement system including:
+
+- Automated insurance eligibility verification
+- Prior authorization management with status tracking
+- Patient self-service portal for appointments and payments
+- Secure document exchange and digital forms
+- Automated appointment reminders via SMS/email
+- Real-time benefits explanation and cost estimates
+
+## Technical Architecture
+
+### Frontend Implementation
+
+The user interface is built using Next.js 14 with the following key components:
+
+```typescript
+// Example of the appointment scheduling component
+interface AppointmentProps {
+  patientId: string;
+  practitionerId: string;
+  serviceType: ServiceCategory;
+}
+
+const AppointmentScheduler: React.FC<AppointmentProps> = ({
+  patientId,
+  practitionerId,
+  serviceType
+}) => {
+  const [availability, setAvailability] = useState<TimeSlot[]>([]);
+  const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
+
+  // Implementation details...
+};
+```
+
+### Database Schema
+
+The PostgreSQL database schema is managed using Drizzle ORM with key tables:
+
+```typescript
+// Core schema definitions
+const patients = pgTable('patients', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  firstName: text('first_name').notNull(),
+  lastName: text('last_name').notNull(),
+  dateOfBirth: date('date_of_birth').notNull(),
+  insuranceInfo: jsonb('insurance_info'),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
+const appointments = pgTable('appointments', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  patientId: uuid('patient_id').references(() => patients.id),
+  scheduledTime: timestamp('scheduled_time').notNull(),
+  serviceType: text('service_type').notNull(),
+  status: text('status').default('scheduled'),
+  notes: text('notes'),
+});
+```
+
+### API Integration Layer
+
+The platform integrates with various healthcare systems through a robust API layer:
+
+- HL7 FHIR-compliant REST APIs for interoperability
+- WebSocket connections for real-time updates
+- Message queue system for asynchronous processing
+- Secure file transfer protocols for document exchange
+
+### Cloud Infrastructure
+
+Deployment architecture leveraging AWS services:
+
+- ECS Fargate for containerized applications
+- RDS for PostgreSQL database management
+- S3 for document storage with lifecycle policies
+- CloudFront for global content delivery
+- SNS/SES for notification delivery
+- CloudWatch for monitoring and logging
+
+## Security Implementation
+
+Comprehensive security measures including:
+
+- HIPAA-compliant data encryption at rest and in transit
+- Role-based access control (RBAC) system
+- Multi-factor authentication
+- Audit logging for all system actions
+- Regular security assessments and penetration testing
+- Automated backup and disaster recovery procedures
+
+## Performance Optimization
+
+The platform implements various optimization techniques:
+
+- Server-side rendering for initial page loads
+- Incremental Static Regeneration for dynamic content
+- Redis caching layer for frequently accessed data
+- Query optimization using database indexes
+- Content Delivery Network for static assets
+- Lazy loading for non-critical components
+
+## Development Workflow
+
+The project follows modern development practices:
+
+- GitFlow branching strategy
+- Automated CI/CD pipeline using GitHub Actions
+- Comprehensive test coverage with Jest and Cypress
+- Code quality enforcement using ESLint and Prettier
+- Regular security dependency scanning
+- Automated deployment with zero-downtime updates
+
+## Documentation
+
+- Comprehensive API documentation using OpenAPI
+- Internal documentation for development team
+- User guides and training materials
+- Regular changelog updates
+- System architecture diagrams
+- Troubleshooting guides
+
+## Future Roadmap
+
+Planned future enhancements include:
+
+- AI-powered coding assistance
+- Enhanced analytics and reporting
+- Mobile application development
+- Integration with additional EMR systems
+- Expanded payment processing options
+- Advanced patient engagement features
+
+## Getting Started
+
+### Prerequisites
+
+```bash
+node >= 18.0.0
+npm >= 9.0.0
+PostgreSQL >= 15.0
+```
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/gemcaps.git
+
+# Install dependencies
+cd gemcaps
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+
+# Run database migrations
+npm run db:migrate
+
+# Start development server
+npm run dev
+```
+
+### Environment Configuration
+
+Required environment variables:
+
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/gemcaps
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
+```
+
+For additional setup instructions and configuration options, please refer to the project's GitHub repository.
