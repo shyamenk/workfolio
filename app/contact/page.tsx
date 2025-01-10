@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { ContactForm } from "@/components/contact-form";
 import {
   Card,
   CardContent,
@@ -6,10 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 import Link from "next/link";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function ContactPage() {
   return (
@@ -30,55 +29,7 @@ export default function ContactPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-6">
-              <div className="space-y-2">
-                <label
-                  htmlFor="name"
-                  className="text-sm font-medium text-emerald-100"
-                >
-                  Name
-                </label>
-                <Input
-                  id="name"
-                  placeholder="Your Name"
-                  className="bg-black/50 border-emerald-500/30 text-emerald-50 placeholder:text-emerald-500/50"
-                />
-              </div>
-              <div className="space-y-2">
-                <label
-                  htmlFor="email"
-                  className="text-sm font-medium text-emerald-100"
-                >
-                  Email
-                </label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="your@email.com"
-                  className="bg-black/50 border-emerald-500/30 text-emerald-50 placeholder:text-emerald-500/50"
-                />
-              </div>
-              <div className="space-y-2">
-                <label
-                  htmlFor="message"
-                  className="text-sm font-medium text-emerald-100"
-                >
-                  Message
-                </label>
-                <Textarea
-                  id="message"
-                  placeholder="Your message here..."
-                  className="bg-black/50 border-emerald-500/30 text-emerald-50 placeholder:text-emerald-500/50"
-                  rows={5}
-                />
-              </div>
-              <Button
-                type="submit"
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white transition-all hover:shadow-[0_0_20px_rgba(16,185,129,0.5)]"
-              >
-                Send Message
-              </Button>
-            </form>
+            <ContactForm />
           </CardContent>
         </Card>
 
@@ -98,8 +49,8 @@ export default function ContactPage() {
                 <span>contact@yourname.com</span>
               </div>
               <div className="flex items-center space-x-3 text-emerald-100">
-                <Twitter className="h-5 w-5" />
-                <span>@yourusername</span>
+                <FaXTwitter className="h-5 w-5" />
+                <span>@shyamenk07</span>
               </div>
             </CardContent>
           </Card>
@@ -113,28 +64,28 @@ export default function ContactPage() {
             <CardContent>
               <div className="flex space-x-4">
                 <Link
-                  href="https://github.com/yourusername"
+                  href="https://github.com/shyamenk"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-emerald-400 hover:text-emerald-300 transition-colors"
                 >
-                  <Github className="h-8 w-8" />
+                  <FaGithub className="h-8 w-8" />
                 </Link>
                 <Link
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://linkedin.com/in/shyamenk"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-emerald-400 hover:text-emerald-300 transition-colors"
                 >
-                  <Linkedin className="h-8 w-8" />
+                  <FaLinkedin className="h-8 w-8" />
                 </Link>
                 <Link
-                  href="https://twitter.com/yourusername"
+                  href="https://twitter.com/shyamenk07"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-emerald-400 hover:text-emerald-300 transition-colors"
                 >
-                  <Twitter className="h-8 w-8" />
+                  <FaXTwitter className="h-8 w-8" />
                 </Link>
               </div>
             </CardContent>
