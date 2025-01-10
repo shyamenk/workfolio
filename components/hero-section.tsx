@@ -7,13 +7,11 @@ import { Button } from "@/components/ui/button";
 const HeroSection = () => {
   return (
     <div className="relative min-h-[calc(100vh-4rem)] w-full">
-      {/* Background Pattern */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute h-full w-full bg-[radial-gradient(circle_500px_at_50%_200px,#059669_0,transparent_80%)] opacity-20" />
       </div>
 
       <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-6xl grid-cols-1 items-center gap-8 px-4 md:grid-cols-5 md:gap-16">
-        {/* Content Section */}
         <div className="col-span-3 flex flex-col items-start justify-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

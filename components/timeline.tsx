@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Calendar, MapPin } from "lucide-react";
+import { Briefcase, Calendar, MapPin, ChevronRight } from "lucide-react";
 
 interface Experience {
   title: string;
@@ -41,55 +41,84 @@ const experiences: Experience[] = [
 
 const ExperienceTimeline: React.FC = () => {
   return (
-    <section className="py-16 bg-zinc-900">
-      <div className="container mx-auto px-4">
+    <section className="py-12 bg-transparent">
+      <div className="max-w-6xl mx-auto px-4">
         <motion.h2
-          className="text-3xl font-bold text-center text-zinc-100 mb-12"
+          className="text-3xl font-bold text-emerald-400 mb-12"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           Professional Experience
         </motion.h2>
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-emerald-500/30 transform -translate-x-1/2"></div>
 
+        <div className="space-y-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
-              className={`mb-12 flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
-              initial={{ opacity: 0, y: 50 }}
+              className="group relative"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
-              <div className="flex-1 md:w-1/2">
-                <div
-                  className={`bg-zinc-800/50 p-6 rounded-lg shadow-lg backdrop-blur-sm border border-zinc-700 ${index % 2 === 0 ? "md:mr-8" : "md:ml-8"}`}
+              {index !== experiences.length - 1 && (
+                <div className="absolute left-8 top-16 bottom-0 w-0.5 bg-gradient-to-b from-emerald-500/50 to-transparent" />
+              )}
+
+              <div className="flex gap-6">
+                <div className="relative flex-shrink-0">
+                  <motion.div
+                    className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/50 flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors duration-300"
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    <Briefcase className="w-6 h-6 text-emerald-400" />
+                  </motion.div>
+                </div>
+
+                {/* Content */}
+                <motion.div
+                  className="flex-1 bg-zinc-900 rounded-2xl p-6 border border-emerald-500/10 hover:border-emerald-500/30 transition-colors duration-300"
+                  whileHover={{ x: 10 }}
                 >
-                  <h3 className="text-xl font-semibold text-zinc-100 mb-2">
-                    {exp.title}
-                  </h3>
-                  <p className="text-emerald-400 mb-2">{exp.company}</p>
-                  <div className="flex items-center text-zinc-400 mb-4">
-                    <MapPin size={16} className="mr-2" />
-                    <span>{exp.location}</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+                    <h3 className="text-xl font-semibold text-emerald-400 flex items-center gap-2">
+                      {exp.title}
+                      <ChevronRight className="w-4 h-4 hidden group-hover:inline-block text-emerald-500/50" />
+                    </h3>
+                    <div className="text-zinc-400 text-sm">{exp.company}</div>
                   </div>
-                  <div className="flex items-center text-zinc-400 mb-4">
-                    <Calendar size={16} className="mr-2" />
-                    <span>{exp.period}</span>
+
+                  {/* Meta info */}
+                  <div className="flex flex-wrap gap-4 mb-4 text-sm text-zinc-400">
+                    <div className="flex items-center gap-1">
+                      <MapPin className="w-4 h-4 text-emerald-500/70" />
+                      {exp.location}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4 text-emerald-500/70" />
+                      {exp.period}
+                    </div>
                   </div>
-                  <ul className="list-disc list-inside text-zinc-300">
+
+                  {/* Description */}
+                  <ul className="space-y-3">
                     {exp.description.map((item, i) => (
-                      <li key={i} className="mb-2">
-                        {item}
-                      </li>
+                      <motion.li
+                        key={i}
+                        className="flex gap-2 text-zinc-300 leading-relaxed"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{
+                          duration: 0.3,
+                          delay: index * 0.2 + i * 0.1,
+                        }}
+                      >
+                        <span className="text-emerald-500/70 mt-1.5">•</span>
+                        <span>{item}</span>
+                      </motion.li>
                     ))}
                   </ul>
-                </div>
-              </div>
-              <div className="flex-shrink-0 w-8 h-8 bg-emerald-500 rounded-full border-4 border-zinc-900 absolute left-0 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-                <Briefcase size={16} className="text-zinc-900" />
+                </motion.div>
               </div>
             </motion.div>
           ))}
