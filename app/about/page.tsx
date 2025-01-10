@@ -143,10 +143,10 @@ export default function About() {
                   Continuous Learner | AWS & Linux Explorer
                 </h3>
                 <p className="text-zinc-300 leading-relaxed">
-                  Beyond coding, I&apos;m deeply invested in expanding my
-                  knowledge in AWS and Linux. Whether it's deploying scalable
-                  applications or mastering the intricacies of server
-                  management, I'm always eager to learn and grow.
+                  Beyond coding&apos; I&apos;m deeply invested in expanding my
+                  knowledge in AWS and Linux. Whether it&apos;s deploying
+                  scalable applications or mastering the intricacies of server
+                  management, I&apos;m always eager to learn and grow.
                 </p>
               </motion.div>
 
@@ -172,12 +172,12 @@ export default function About() {
                 transition={{ duration: 0.2 }}
               >
                 <h3 className="flex items-center text-lg font-medium text-emerald-400">
-                  Let's Connect!
+                  Let&apos;s Connect!
                 </h3>
                 <p className="text-zinc-300 leading-relaxed">
-                  I'm always excited to connect with fellow developers, share
-                  knowledge, and collaborate on exciting projects. Feel free to
-                  reach out!
+                  I&apos;m always excited to connect with fellow developers,
+                  share knowledge, and collaborate on exciting projects. Feel
+                  free to reach out!
                 </p>
               </motion.div>
             </div>
