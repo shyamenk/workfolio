@@ -3,8 +3,10 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Github, Globe } from "lucide-react";
+import { Globe } from "lucide-react";
 import { getAllProjects, getProjectBySlug } from "@/app/lib/mdx";
+import { FaGithub } from "react-icons/fa";
+import { ScrollProgress } from "@/components/shared/scroll-progress";
 
 interface PageProps {
   params: {
@@ -42,15 +44,24 @@ export default async function ProjectPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-black/95 to-emerald-950/20">
+    <div className="min-h-screen ">
+      <ScrollProgress />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24 mt-16">
         <div className="max-w-4xl mx-auto">
-          {/* Project Header */}
           <div className="mb-8">
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white to-emerald-200 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold mb-8 text-emerald-500">
               {project.meta.title}
             </h1>
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="relative h-[400px] mb-12 rounded-lg overflow-hidden">
+              <Image
+                src={project.meta.image}
+                alt={project.meta.title}
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2 mb-8">
               {project.meta.technologies.map((tech: string) => (
                 <Badge
                   key={tech}
@@ -69,7 +80,7 @@ export default async function ProjectPage({ params }: PageProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Github className="mr-2 h-4 w-4" />
+                    <FaGithub className="mr-2 h-4 w-4" />
                     View Code
                   </a>
                 </Button>
@@ -87,16 +98,6 @@ export default async function ProjectPage({ params }: PageProps) {
                 </Button>
               )}
             </div>
-          </div>
-
-          {/* Project Image */}
-          <div className="relative h-[400px] mb-12 rounded-lg overflow-hidden">
-            <Image
-              src={project.meta.image}
-              alt={project.meta.title}
-              fill
-              className="object-cover"
-            />
           </div>
 
           {/* MDX Content */}
