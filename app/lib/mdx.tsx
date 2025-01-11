@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import React, { cache } from "react";
+import React from "react";
 import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -36,12 +36,6 @@ const prettyCodeOptions = {
 interface PreComponentProps {
   children: React.ReactNode;
   [key: string]: unknown;
-}
-
-interface CodeBlockProps {
-  code: string;
-  language: string;
-  filename?: string;
 }
 
 // Custom components that can be used in MDX
@@ -85,17 +79,6 @@ interface ProjectData {
 }
 
 // Cache the file reading operation
-const getFileContents = cache(async (slug: string): Promise<string | null> => {
-  const projectsDirectory = path.join(process.cwd(), "content/projects");
-  const fullPath = path.join(projectsDirectory, `${slug}.mdx`);
-
-  try {
-    return fs.readFileSync(fullPath, "utf8");
-  } catch (error) {
-    console.error(`Error reading file ${fullPath}:`, error);
-    return null;
-  }
-});
 
 // Get a single project by slug
 export async function getProjectBySlug(
