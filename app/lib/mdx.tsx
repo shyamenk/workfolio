@@ -17,6 +17,17 @@ interface PrettyCodeNode {
   };
 }
 
+interface CodeProps {
+  children: string;
+  className?: string;
+  filename?: string;
+}
+
+interface PreProps {
+  children?: React.ReactElement<CodeProps>;
+  [key: string]: unknown;
+}
+
 const prettyCodeOptions = {
   theme: "github-dark",
   onVisitLine(node: PrettyCodeNode) {
@@ -32,34 +43,28 @@ const prettyCodeOptions = {
   },
 };
 
-// Define types for pre component props
-interface PreComponentProps {
-  children: React.ReactNode;
-  [key: string]: unknown;
-}
-
-// Custom components that can be used in MDX
 const components: MDXComponents = {
-  pre: ({ children, ...props }: PreComponentProps) => {
-    const childrenArray = React.Children.toArray(children);
-    const child = childrenArray[0] as React.ReactElement;
+  pre: ({ children, ...props }: PreProps) => {
+    if (!children || !React.isValidElement(children)) {
+      return <pre {...props}>{children}</pre>;
+    }
 
-    if (child?.props) {
-      const code = child.props.children as string;
-      const language = child.props.className?.replace(
-        "language-",
-        "",
-      ) as string;
-      const filename = child.props.filename as string | undefined;
+    const childProps = children.props as CodeProps;
+
+    if (childProps) {
+      const code = childProps.children;
+      const language = childProps.className?.replace("language-", "") || "text";
+      const filename = childProps.filename;
 
       return <CodeBlock code={code} language={language} filename={filename} />;
     }
+
     return <pre {...props}>{children}</pre>;
   },
 };
 
-// Define the type for project frontmatter
-export interface ProjectFrontmatter {
+// Rest of your code remains the same
+interface ProjectFrontmatter {
   slug: string;
   title: string;
   description: string;
@@ -69,18 +74,14 @@ export interface ProjectFrontmatter {
   liveUrl?: string;
   date?: string;
   featured?: boolean;
-  commonTechnologies?: number; // Added for related projects functionality
+  commonTechnologies?: number;
 }
 
-// Define return type for getProjectBySlug
 interface ProjectData {
   meta: ProjectFrontmatter;
   content: React.ReactNode;
 }
 
-// Cache the file reading operation
-
-// Get a single project by slug
 export async function getProjectBySlug(
   slug: string,
 ): Promise<ProjectData | null> {
@@ -127,7 +128,6 @@ export async function getProjectBySlug(
   }
 }
 
-// Get all projects
 export async function getAllProjects(): Promise<ProjectFrontmatter[]> {
   const projectsDirectory = path.join(process.cwd(), "content/projects");
 
@@ -157,13 +157,11 @@ export async function getAllProjects(): Promise<ProjectFrontmatter[]> {
   }
 }
 
-// Get featured projects
 export async function getFeaturedProjects(): Promise<ProjectFrontmatter[]> {
   const projects = await getAllProjects();
   return projects.filter((project) => project.featured);
 }
 
-// Get related projects based on technologies
 export async function getRelatedProjects(
   currentSlug: string,
   limit = 3,
