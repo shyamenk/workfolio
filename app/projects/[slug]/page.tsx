@@ -9,14 +9,13 @@ import { FaGithub } from "react-icons/fa";
 import { ScrollProgress } from "@/components/shared/scroll-progress";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
   const project = await getProjectBySlug(params.slug);
 
   if (!project) {
@@ -36,7 +35,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ProjectPage({ params }: PageProps) {
+export default async function ProjectPage(props: PageProps) {
+  const params = await props.params;
   const project = await getProjectBySlug(params.slug);
 
   if (!project) {
