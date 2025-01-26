@@ -36,7 +36,7 @@ export function ContactForm() {
   return (
     <form ref={formRef} action={handleSubmit} className="space-y-6">
       <div className="space-y-2">
-        <label htmlFor="name" className="text-sm font-medium text-emerald-700">
+        <label htmlFor="name" className="text-sm font-medium text-emerald-400">
           Name
         </label>
         <Input
@@ -48,7 +48,7 @@ export function ContactForm() {
         />
       </div>
       <div className="space-y-2">
-        <label htmlFor="email" className="text-sm font-medium text-emerald-700">
+        <label htmlFor="email" className="text-sm font-medium text-emerald-400">
           Email
         </label>
         <Input
@@ -63,7 +63,7 @@ export function ContactForm() {
       <div className="space-y-2">
         <label
           htmlFor="message"
-          className="text-sm font-medium text-emerald-700"
+          className="text-sm font-medium text-emerald-400"
         >
           Message
         </label>

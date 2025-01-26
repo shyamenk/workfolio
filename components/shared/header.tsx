@@ -16,10 +16,18 @@ export default function Header() {
 
   const menuItems = [
     { name: "Home", path: "/" },
+    { name: "Blog", path: "https://backendalmanac.in", external: true },
     { name: "Projects", path: "/projects" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];
+
+  const handleDownloadCV = () => {
+    const link = document.createElement("a");
+    link.href = "/shyam_kumar_CV.pdf";
+    link.download = "Shyam_Kumar_CV.pdf";
+    link.click();
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +55,6 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2">
           <Mountain className="h-6 w-6 text-emerald-400" />
         </Link>
-
         <Sheet>
           <SheetTrigger asChild className="lg:hidden">
             <Button
@@ -62,7 +69,13 @@ export default function Header() {
           <SheetContent side="right" className="border-zinc-800 bg-zinc-900">
             <div className="flex flex-col gap-4 pt-10">
               {menuItems.map((item) => (
-                <Link href={item.path} key={item.name}>
+                <Link
+                  href={item.path}
+                  key={item.name}
+                  {...(item.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                >
                   <Button
                     variant="ghost"
                     className={`w-full justify-start text-base transition-all duration-300 ${
@@ -83,10 +96,15 @@ export default function Header() {
             </div>
           </SheetContent>
         </Sheet>
-
         <div className="hidden items-center gap-6 rounded-full border border-zinc-800 bg-zinc-900/50 px-6 py-1.5 backdrop-blur-sm lg:flex">
           {menuItems.map((item) => (
-            <Link href={item.path} key={item.name}>
+            <Link
+              href={item.path}
+              key={item.name}
+              {...(item.external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+            >
               <motion.button
                 className={`relative px-2 py-1.5 text-sm font-medium transition-colors ${
                   activeItem === item.name
@@ -103,12 +121,14 @@ export default function Header() {
             </Link>
           ))}
         </div>
-
         {/* Download Button */}
-        <Button className="hidden gap-2 lg:inline-flex bg-emerald-600 hover:bg-emerald-700 text-white">
+        <Button
+          onClick={handleDownloadCV}
+          className="hidden gap-2 lg:inline-flex bg-emerald-600 hover:bg-emerald-700 text-white"
+        >
           <Download className="h-4 w-4" />
           Download CV
-        </Button>
+        </Button>{" "}
       </div>
     </nav>
   );
