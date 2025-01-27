@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { ScrollProgress } from "./shared/scroll-progress";
+import Link from "next/link";
 
 const stats = [
   { label: "Years Experience", value: "3+", icon: Briefcase },
@@ -53,9 +54,14 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700">
-                View My Projects
-              </Button>
+              <Link href="/projects">
+                <Button
+                  size="lg"
+                  className="bg-emerald-600 hover:bg-emerald-700"
+                >
+                  View My Projects
+                </Button>
+              </Link>
               <div className="flex items-center gap-4">
                 <Button
                   variant="outline"
