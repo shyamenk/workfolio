@@ -41,7 +41,7 @@ export default function About() {
         transition={{ duration: 0.5 }}
       >
         <motion.h1
-          className="mb-16 text-4xl font-bold tracking-tight text-emerald-400"
+          className="mb-16 text-4xl font-mono font-bold tracking-tight text-[#a6e3a1]"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -58,7 +58,7 @@ export default function About() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <motion.div
-              className="relative mx-auto w-64 h-64 overflow-hidden rounded-full ring-4 ring-emerald-500/20"
+              className="relative mx-auto w-64 h-64 overflow-hidden rounded-full ring-4 ring-[#cba6f7]/20"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
@@ -71,13 +71,13 @@ export default function About() {
             </motion.div>
 
             <div className="text-center space-y-2">
-              <h2 className="text-2xl font-semibold text-zinc-100">
+              <h2 className="text-2xl font-mono font-semibold text-[#cdd6f4]">
                 Shyam Kumar
               </h2>
-              <p className="text-emerald-400 font-medium">
+              <p className="text-[#a6e3a1] font-mono font-medium">
                 Full-Stack Developer
               </p>
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm text-[#bac2de] font-mono">
                 Cyber Sapient Technologies
               </p>
             </div>
@@ -97,7 +97,7 @@ export default function About() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-11 w-11 rounded-full border border-emerald-500/20 bg-zinc-800/50 text-zinc-400 hover:bg-emerald-500/10 hover:text-emerald-400 hover:border-emerald-500/40"
+                      className="h-11 w-11 rounded-full border border-[#cba6f7]/20 bg-[#45475a]/50 text-[#cdd6f4] hover:bg-[#cba6f7]/10 hover:text-[#cba6f7] hover:border-[#cba6f7]/40"
                     >
                       {link.icon}
                       <span className="sr-only">{link.name}</span>
@@ -121,10 +121,10 @@ export default function About() {
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
               >
-                <h3 className="flex items-center text-lg font-medium text-emerald-400">
+                <h3 className="flex items-center text-lg font-mono font-medium text-[#a6e3a1]">
                   Full-Stack Engineer| JavaScript Enthusiast
                 </h3>
-                <p className="text-zinc-300 leading-relaxed">
+                <p className="text-[#cdd6f4] font-mono leading-relaxed">
                   Hi there! I&apos;m a passionate Full-Stack Developer with a
                   keen interest in creating seamless and dynamic web
                   applications. My toolkit includes JavaScript, TypeScript,
@@ -139,10 +139,10 @@ export default function About() {
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
               >
-                <h3 className="flex items-center text-lg font-medium text-emerald-400">
+                <h3 className="flex items-center text-lg font-mono font-medium text-[#cba6f7]">
                   Continuous Learner | AWS & Linux Explorer
                 </h3>
-                <p className="text-zinc-300 leading-relaxed">
+                <p className="text-[#cdd6f4] font-mono leading-relaxed">
                   Beyond coding&apos; I&apos;m deeply invested in expanding my
                   knowledge in AWS and Linux. Whether it&apos;s deploying
                   scalable applications or mastering the intricacies of server
@@ -155,10 +155,10 @@ export default function About() {
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
               >
-                <h3 className="flex items-center text-lg font-medium text-emerald-400">
+                <h3 className="flex items-center text-lg font-mono font-medium text-[#f5c2e7]">
                   What Drives Me?
                 </h3>
-                <p className="text-zinc-300 leading-relaxed">
+                <p className="text-[#cdd6f4] font-mono leading-relaxed">
                   Building intuitive and responsive user interfaces, solving
                   complex problems with elegant solutions, staying ahead of the
                   curve with the latest tech trends, and collaborating with
@@ -171,10 +171,10 @@ export default function About() {
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
               >
-                <h3 className="flex items-center text-lg font-medium text-emerald-400">
+                <h3 className="flex items-center text-lg font-mono font-medium text-[#a6e3a1]">
                   Let&apos;s Connect!
                 </h3>
-                <p className="text-zinc-300 leading-relaxed">
+                <p className="text-[#cdd6f4] font-mono leading-relaxed">
                   I&apos;m always excited to connect with fellow developers,
                   share knowledge, and collaborate on exciting projects. Feel
                   free to reach out!

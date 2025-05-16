@@ -37,33 +37,9 @@ const technologies = [
   { name: "Linux", icon: FaLinux, color: "text-yellow-500" },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 200,
-      damping: 15,
-    },
-  },
-};
-
 export default function TechStack() {
   return (
-    <section className="relative w-full py-32 bg-gradient-to-b from-zinc-900/0 to-zinc-900/20 overflow-hidden">
+    <section className="relative w-full py-10 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Title and Description */}
         <motion.div
@@ -72,55 +48,68 @@ export default function TechStack() {
           transition={{ duration: 0.6 }}
           className="max-w-6xl text-left mx-auto"
         >
-          <h2 className="text-5xl font-bold tracking-tight text-emerald-500">
+          <h2 className="text-4xl font-mono font-bold tracking-tight text-[#a6e3a1] mb-8">
             Tech Stack
           </h2>
-          <p className="mt-4 text-lg text-zinc-300">
+          <p className="mt-4 mb-10 text-lg font-mono text-[#cdd6f4]">
             Cutting-edge technologies I leverage to bring ideas to life
           </p>
         </motion.div>
 
-        {/* Tech Grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="mt-20 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8"
-        >
-          {technologies.map((tech) => (
-            <motion.div
-              key={tech.name}
-              variants={item}
-              className="group relative flex flex-col items-center"
-            >
-              {/* Icon Card */}
-              <div className="relative mb-6 flex h-24 w-full items-center justify-center rounded-2xl bg-zinc-800/50 backdrop-blur-sm ring-1 ring-zinc-700 transition-all duration-300 hover:ring-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/10">
-                <tech.icon
-                  className={`w-12 h-12 ${tech.color} transition-all duration-300 group-hover:scale-110 `}
-                />
-                {/* Hover Effect Line */}
-                <div className="absolute -bottom-2 h-px w-24 bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              </div>
-
-              {/* Tech Name */}
-              <motion.span
-                className="text-lg font-medium text-zinc-400 transition-colors duration-300 group-hover:text-emerald-400"
-                whileHover={{ y: -2 }}
-              >
-                {tech.name}
-              </motion.span>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Background Elements */}
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="absolute h-[600px] w-[600px] rounded-full bg-emerald-500/5 blur-3xl"
-          />
+        {/* Marquee Row */}
+        <div className="relative w-full overflow-x-hidden">
+          <div className="flex gap-8 animate-marquee whitespace-nowrap">
+            {technologies.map((tech, idx) => {
+              // Pick a color from the palette for variety
+              const accentColors = [
+                '#a6e3a1', // Green
+                '#f5c2e7', // Pink
+                '#cba6f7', // Mauve
+                '#89b4fa', // Blue
+                '#f9e2af', // Yellow
+                '#fab387', // Peach
+                '#94e2d5', // Teal
+                '#f38ba8', // Red
+              ];
+              const color = accentColors[idx % accentColors.length];
+              return (
+                <div
+                  key={tech.name + idx}
+                  className="flex flex-col items-center min-w-[100px]"
+                >
+                  <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-[#313244]/20 backdrop-blur-sm border border-[#a6e3a1]/10 mb-2 transition-all duration-300 hover:bg-[#313244]/30 hover:border-[#a6e3a1]/20">
+                    <tech.icon className="w-8 h-8" style={{ color }} />
+                  </div>
+                  <span className="text-sm font-mono" style={{ color }}>{tech.name}</span>
+                </div>
+              );
+            })}
+            {/* Duplicate for seamless loop */}
+            {technologies.map((tech, idx) => {
+              const accentColors = [
+                '#a6e3a1', // Green
+                '#f5c2e7', // Pink
+                '#cba6f7', // Mauve
+                '#89b4fa', // Blue
+                '#f9e2af', // Yellow
+                '#fab387', // Peach
+                '#94e2d5', // Teal
+                '#f38ba8', // Red
+              ];
+              const color = accentColors[idx % accentColors.length];
+              return (
+                <div
+                  key={tech.name + '-dup-' + idx}
+                  className="flex flex-col items-center min-w-[100px]"
+                >
+                  <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-[#313244]/20 backdrop-blur-sm border border-[#a6e3a1]/10 mb-2 transition-all duration-300 hover:bg-[#313244]/30 hover:border-[#a6e3a1]/20">
+                    <tech.icon className="w-8 h-8" style={{ color }} />
+                  </div>
+                  <span className="text-sm font-mono" style={{ color }}>{tech.name}</span>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

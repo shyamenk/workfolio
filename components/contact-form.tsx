@@ -14,7 +14,7 @@ function SubmitButton() {
     <Button
       type="submit"
       disabled={pending}
-      className="w-full bg-emerald-600 hover:bg-emerald-700 text-white transition-all"
+      className="w-full bg-[#a6e3a1] hover:bg-[#cba6f7] text-[#1e1e2e] font-mono transition-all"
     >
       {pending ? "Sending..." : "Send Message"}
     </Button>
@@ -36,19 +36,19 @@ export function ContactForm() {
   return (
     <form ref={formRef} action={handleSubmit} className="space-y-6">
       <div className="space-y-2">
-        <label htmlFor="name" className="text-sm font-medium text-emerald-400">
+        <label htmlFor="name" className="text-sm font-mono font-medium text-[#a6e3a1]">
           Name
         </label>
         <Input
           id="name"
           name="name"
           required
-          className="w-full px-3 py-2 border border-emerald-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+          className="w-full px-3 py-2 border border-[#a6e3a1]/40 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#cba6f7] focus:border-transparent font-mono text-[#cdd6f4] bg-[#313244]/60 placeholder:text-[#bac2de]"
           placeholder="Your Name"
         />
       </div>
       <div className="space-y-2">
-        <label htmlFor="email" className="text-sm font-medium text-emerald-400">
+        <label htmlFor="email" className="text-sm font-mono font-medium text-[#a6e3a1]">
           Email
         </label>
         <Input
@@ -56,14 +56,14 @@ export function ContactForm() {
           name="email"
           type="email"
           required
-          className="w-full px-3 py-2 border border-emerald-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+          className="w-full px-3 py-2 border border-[#a6e3a1]/40 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#cba6f7] focus:border-transparent font-mono text-[#cdd6f4] bg-[#313244]/60 placeholder:text-[#bac2de]"
           placeholder="your@email.com"
         />
       </div>
       <div className="space-y-2">
         <label
           htmlFor="message"
-          className="text-sm font-medium text-emerald-400"
+          className="text-sm font-mono font-medium text-[#a6e3a1]"
         >
           Message
         </label>
@@ -71,7 +71,7 @@ export function ContactForm() {
           id="message"
           name="message"
           required
-          className="w-full px-3 py-2 border border-emerald-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+          className="w-full px-3 py-2 border border-[#a6e3a1]/40 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#cba6f7] focus:border-transparent font-mono text-[#cdd6f4] bg-[#313244]/60 placeholder:text-[#bac2de]"
           placeholder="Your message here..."
           rows={5}
         />
@@ -79,7 +79,7 @@ export function ContactForm() {
       <SubmitButton />
       {message && (
         <p
-          className={`text-sm ${message.includes("successfully") ? "text-emerald-600" : "text-red-500"}`}
+          className={`text-sm font-mono ${message.includes("successfully") ? "text-[#a6e3a1]" : "text-[#f38ba8]"}`}
         >
           {message}
         </p>

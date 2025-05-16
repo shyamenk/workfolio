@@ -13,13 +13,13 @@ export default async function ProjectPage() {
         <section id="featured" className="mb-32">
           <div className="max-w-4xl">
             <div className="flex items-center justify-between mb-16">
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-emerald-200 bg-clip-text text-transparent">
+              <h2 className="text-3xl font-mono font-bold bg-gradient-to-r from-white to-[#a6e3a1] bg-clip-text text-transparent">
                 Featured Projects
               </h2>
-              <div className="h-[1px] flex-1 mx-8 bg-gradient-to-r from-emerald-500/50 to-transparent" />
+              <div className="h-[1px] flex-1 mx-8 bg-gradient-to-r from-[#a6e3a1]/50 to-transparent" />
             </div>
 
-            <p className="text-[20px] text-gray-300 leading-relaxed">
+            <p className="text-[18px] font-mono text-[#cdd6f4] leading-relaxed">
               I&apos;ve been working on some exciting projects lately, pushing
               the boundaries of web development and exploring new technologies.
               Here are a few highlights from my recent work that showcase my
@@ -36,10 +36,10 @@ export default async function ProjectPage() {
         {/* All Projects Section */}
         <section id="all-projects" className="pt-16">
           <div className="flex items-center justify-between mb-16">
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-emerald-200 bg-clip-text text-transparent">
+            <h2 className="text-3xl font-mono font-bold bg-gradient-to-r from-white to-[#f5c2e7] bg-clip-text text-transparent">
               All Projects
             </h2>
-            <div className="h-[1px] flex-1 mx-8 bg-gradient-to-r from-emerald-500/50 to-transparent" />
+            <div className="h-[1px] flex-1 mx-8 bg-gradient-to-r from-[#f5c2e7]/50 to-transparent" />
           </div>
           <div className="grid md:grid-cols-2 gap-12">
             {projects.map((project) => (

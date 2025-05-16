@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Calendar, MapPin, ChevronRight } from "lucide-react";
+import { Briefcase, Calendar, MapPin } from "lucide-react";
 
 interface Experience {
   title: string;
@@ -47,81 +47,79 @@ const ExperienceTimeline: React.FC = () => {
     <section className="py-20 bg-transparent">
       <div className="max-w-6xl mx-auto px-4">
         <motion.h2
-          className="text-4xl font-bold text-emerald-400 mb-16 text-center"
+          className="text-3xl font-mono font-bold text-[#89b4fa] mb-12 text-left"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Professional Experience
+          Professional Journey
         </motion.h2>
 
-        <div className="space-y-12 relative">
-          {/* Timeline line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-500/20 to-transparent" />
-
+        <div className="space-y-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
-              className="group relative"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="relative"
             >
-              <div className="flex gap-6">
-                {/* Icon */}
-                <div className="relative flex-shrink-0">
+              {/* Timeline connector */}
+              {index !== experiences.length - 1 && (
+                <div className="absolute left-6 top-16 bottom-0 w-0.5 bg-gradient-to-b from-[#89b4fa]/20 to-transparent" />
+              )}
+
+              <div className="flex gap-8">
+                {/* Timeline dot */}
+                <div className="flex-shrink-0">
                   <motion.div
-                    className="w-16 h-16 rounded-full bg-emerald-500/10 border-2 border-emerald-500/30 flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors duration-300"
+                    className="w-12 h-12 rounded-full bg-[#313244] border-2 border-[#89b4fa]/30 flex items-center justify-center"
                     whileHover={{ scale: 1.1 }}
                   >
-                    <Briefcase className="w-6 h-6 text-emerald-400" />
+                    <Briefcase className="w-5 h-5 text-[#89b4fa]" />
                   </motion.div>
                 </div>
 
                 {/* Content */}
-                <motion.div
-                  className="flex-1 bg-zinc-900 rounded-2xl p-8 border border-emerald-500/10 hover:border-emerald-500/30 transition-colors duration-300 shadow-lg hover:shadow-emerald-500/10"
-                  whileHover={{ x: 10 }}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6">
-                    <h3 className="text-2xl font-semibold text-emerald-400 flex items-center gap-2">
-                      {exp.title}
-                      <ChevronRight className="w-5 h-5 hidden group-hover:inline-block text-emerald-500/50 transition-transform duration-300 group-hover:translate-x-1" />
-                    </h3>
-                    <div className="text-zinc-400 text-lg">{exp.company}</div>
-                  </div>
-
-                  {/* Meta info */}
-                  <div className="flex flex-wrap gap-4 mb-6 text-sm text-zinc-400">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-5 h-5 text-emerald-500/70" />
-                      {exp.location}
+                <div className="flex-grow">
+                  <motion.div
+                    className="bg-[#313244]/50 rounded-xl p-6 border border-[#89b4fa]/10 hover:border-[#89b4fa]/20 transition-all duration-300"
+                    whileHover={{ y: -2 }}
+                  >
+                    <div className="flex flex-wrap items-center gap-4 mb-4">
+                      <h3 className="text-xl font-mono font-semibold text-[#89b4fa]">
+                        {exp.title}
+                      </h3>
+                      <div className="flex items-center gap-2 text-sm text-[#cdd6f4]">
+                        <MapPin className="w-4 h-4 text-[#89b4fa]/70" />
+                        {exp.location}
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-[#cdd6f4]">
+                        <Calendar className="w-4 h-4 text-[#89b4fa]/70" />
+                        {exp.period}
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-5 h-5 text-emerald-500/70" />
-                      {exp.period}
-                    </div>
-                  </div>
 
-                  {/* Description */}
-                  <ul className="space-y-4">
-                    {exp.description.map((item, i) => (
-                      <motion.li
-                        key={i}
-                        className="flex gap-3 text-zinc-300 leading-relaxed"
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{
-                          duration: 0.3,
-                          delay: index * 0.2 + i * 0.1,
-                        }}
-                      >
-                        <span className="text-emerald-500/70 mt-1.5">•</span>
-                        <span>{item}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
+                    <div className="text-[#cba6f7] text-lg font-mono mb-4">
+                      {exp.company}
+                    </div>
+
+                    <ul className="space-y-2">
+                      {exp.description.map((item, i) => (
+                        <motion.li
+                          key={i}
+                          className="flex gap-2 text-[#cdd6f4] text-sm"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.3, delay: index * 0.1 + i * 0.05 }}
+                        >
+                          <span className="text-[#89b4fa]/70 mt-1">•</span>
+                          <span>{item}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                </div>
               </div>
             </motion.div>
           ))}
