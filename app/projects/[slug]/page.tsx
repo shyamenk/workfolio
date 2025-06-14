@@ -54,12 +54,14 @@ export default async function ProjectPage(props: PageProps) {
             <h1 className="text-5xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-[#a6e3a1] to-[#cba6f7]">
               {project.meta.title}
             </h1>
-            <div className="relative h-[500px] mb-12 rounded-xl overflow-hidden shadow-2xl group">
+            <div className="relative w-full aspect-[16/9] mb-12 rounded-xl overflow-hidden shadow-2xl">
               <Image
                 src={project.meta.image || "/placeholder.svg"}
                 alt={project.meta.title}
                 fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                className="object-contain bg-[#1e1e2e] transition-transform duration-300"
+                priority
               />
             </div>
 

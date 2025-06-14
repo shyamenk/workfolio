@@ -28,17 +28,19 @@ export default function ProjectCard({
         group relative overflow-hidden border-0 
         bg-gradient-to-br from-[#313244] to-[#181825]
         backdrop-blur-sm transition-all duration-300
-        hover:shadow-[0_0_40px_rgba(203,166,247,0.15)] hover:scale-[1.02]
+        hover:shadow-[0_0_40px_rgba(203,166,247,0.15)]
         ${featured ? "lg:col-span-2" : ""}
       `}
       >
         <div className="absolute inset-0.5 rounded-lg " />
-        <div className={`relative ${featured ? "h-80" : "h-64"} overflow-hidden`}>
+        <div className={`relative ${featured ? "h-80" : "h-64"} overflow-hidden bg-[#1e1e2e]`}>
           <Image
             src={image || "/placeholder.svg"}
             alt={title}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-contain transition-transform duration-700"
+            priority={featured}
           />
         </div>
         <CardHeader className="relative z-10 p-5 pb-0">

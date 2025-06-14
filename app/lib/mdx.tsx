@@ -11,7 +11,7 @@ import type { MDXComponents } from "mdx/types";
 import { CodeBlock } from "@/components/code-block";
 
 interface PrettyCodeNode {
-  children: { type: string; value: string }[];
+  children: { type: string; value: string; }[];
   properties: {
     className: string[];
   };

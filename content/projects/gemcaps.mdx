@@ -1,8 +1,8 @@
 ---
 slug: gemcaps
 title: Gemcaps - Healthcare RCM Platform
-description: A comprehensive healthcare Revenue Cycle Management platform streamlining medical billing, coding, and patient services with advanced automation.
-date: '2025-01-10'
+description: A comprehensive healthcare Revenue Cycle Management platform streamlining medical billing, coding, and patient services with advanced automation and data processing pipelines.
+date: "2024-01-20"
 image: /1.png
 technologies:
   - Next.js
@@ -10,49 +10,120 @@ technologies:
   - PostgreSQL
   - Drizzle ORM
   - AWS SNS/SES
+  - AWS ECS
+  - AWS Lambda
+  - Redis
   - shadcn/ui
-githubUrl: https://github.com/yourusername/gemcaps
-liveUrl: https://gemcaps-demo.com
+liveUrl: https://gemcapsrcm.com/
 featured: true
 ---
 
 # Gemcaps Healthcare RCM Platform
 
-Gemcaps is an advanced healthcare Revenue Cycle Management (RCM) platform designed to streamline medical billing, coding, and patient services. It utilizes cutting-edge cloud technologies to create a unified, efficient workflow for healthcare providers.
+Gemcaps is an advanced healthcare Revenue Cycle Management (RCM) platform designed to streamline medical billing, coding, and patient services. As a Technical Lead, I led a team of 3 developers in building a robust, scalable system that handles complex healthcare data processing and real-time analytics.
 
 ## Core Features
 
 ### Medical Coding Automation
+
 - Real-time ICD-10 and CPT code validation
 - Machine learning-powered code suggestions
 - Automated code review with 98% accuracy
+- Custom rule engine for coding compliance
 
 ### Billing Management
+
 - Automated claim generation and submission
 - Real-time payment processing
 - Customizable billing rules and fee schedules
+- Multi-payer integration support
 
 ### Patient Services Portal
+
 - Insurance eligibility verification
 - Appointment scheduling and automated reminders
 - Secure document exchange and digital forms
+- Patient payment processing and financial counseling
+
+### Data Processing & Analytics
+
+- Real-time data processing pipeline for claims and payments
+- Advanced analytics dashboard for revenue insights
+- Automated reporting and KPI tracking
+- Predictive analytics for revenue forecasting
+
+## Technical Architecture
+
+### Data Pipeline Design
+
+- Designed and implemented ETL pipelines using AWS Glue
+- Real-time data processing with AWS Lambda functions
+- Batch processing for large datasets using AWS ECS
+- Data validation and quality checks at each pipeline stage
+
+### Database Architecture
+
+- Designed normalized database schema for healthcare data
+- Implemented efficient indexing strategies for query optimization
+- Set up database replication and backup systems
+- Optimized query performance for real-time analytics
+
+### System Architecture
+
+- Microservices architecture for scalable deployment
+- Containerized services using Docker and AWS ECS
+- Load balancing and auto-scaling configuration
+- High availability setup with multi-region deployment
 
 ## Technical Stack
-- **Frontend**: Built with Next.js 14 and TypeScript for dynamic, fast user interfaces
-- **Backend**: PostgreSQL with Drizzle ORM for efficient data management
-- **Cloud**: Utilizes AWS services like SNS, SES, and S3 for scalable storage, notifications, and system monitoring
+
+- **Frontend**:
+
+  - Next.js 14 with TypeScript
+  - shadcn/ui for component library
+  - React Query for state management
+  - Tailwind CSS for styling
+
+- **Backend**:
+
+  - Node.js with TypeScript
+  - PostgreSQL with Drizzle ORM
+  - Redis for caching
+  - RESTful API architecture
+
+- **Infrastructure**:
+  - AWS ECS for container orchestration
+  - AWS Lambda for serverless functions
+  - AWS SNS/SES for notifications
+  - AWS S3 for document storage
+  - AWS Glue for workflow management
+
+## Leadership & Development
+
+- Led a team of 3 developers in implementing core features
+- Established coding standards and best practices
+- Conducted code reviews and mentored team members
+- Managed sprint planning and technical debt reduction
 
 ## Key Benefits
+
 - **Automation**: Streamlines workflows to reduce errors and improve efficiency
 - **Security**: HIPAA-compliant with encryption and multi-factor authentication
-- **Performance**: Optimized with server-side rendering, Redis caching, and content delivery networks (CDN)
+- **Performance**: Optimized with server-side rendering, Redis caching, and CDN
+- **Scalability**: Handles growing data volumes with efficient processing pipelines
 
 ## Development Practices
-- **CI/CD**: Automated pipelines using GitHub Actions for fast and reliable deployments
+
+- **CI/CD**: Automated pipelines using GitHub Actions
 - **Testing**: Comprehensive test coverage with Jest and Cypress
-- **Documentation**: Detailed API docs, system architecture, and user guides for easy onboarding
+- **Documentation**: Detailed API docs, system architecture, and user guides
+- **Monitoring**: Real-time system monitoring and alerting
 
 ## Future Enhancements
-- AI-powered coding assistance, advanced patient engagement features, and mobile app development are planned for future releases.
 
-[Gemcaps Demo](https://gemcaps-demo.com)
+- AI-powered coding assistance
+- Advanced patient engagement features
+- Mobile app development
+- Enhanced analytics and reporting capabilities
+
+[Gemcaps Demo](https://gemcapsrcm.com/)
