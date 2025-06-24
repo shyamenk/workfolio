@@ -60,7 +60,7 @@ export default async function ProjectPage(props: PageProps) {
                 alt={project.meta.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-                className="object-contain bg-[#1e1e2e] transition-transform duration-300"
+                className="object-cover bg-[#1e1e2e] transition-transform duration-300"
                 priority
               />
             </div>

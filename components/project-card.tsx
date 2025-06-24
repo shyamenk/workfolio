@@ -75,13 +75,13 @@ export default function ProjectCard({
       `}
       >
         <div className="absolute inset-0.5 rounded-lg " />
-        <div className={`relative ${featured ? "h-80" : "h-64"} overflow-hidden bg-[#1e1e2e]`}>
+        <div className={`relative ${featured ? "h-80" : "h-64"} overflow-hidden bg-[#1e1e2e] rounded-t-lg`}>
           <Image
             src={image || "/placeholder.svg"}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-contain transition-transform duration-700"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
             priority={featured}
           />
         </div>
