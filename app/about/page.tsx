@@ -164,7 +164,7 @@ export default function About() {
                   Ready to Start Your Project?
                 </h3>
                 <p className="text-[#cdd6f4] font-mono leading-relaxed">
-                  Whether you need a complete web application, technical consultation, or ongoing development support, I'm here to help bring your ideas to life. Let's discuss your project requirements and explore how we can work together to achieve your goals. I'm currently accepting new clients and excited to contribute to your success.
+                  Whether you need a complete web application, technical consultation, or ongoing development support, I&apos;m here to help bring your ideas to life. Let&apos;s discuss your project requirements and explore how we can work together to achieve your goals. I&apos;m currently accepting new clients and excited to contribute to your success.
                 </p>
               </motion.div>
             </div>
