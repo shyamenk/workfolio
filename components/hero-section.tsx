@@ -1,3 +1,9 @@
+/**
+ * @file HeroSection.tsx
+ * @description The main hero section component of the portfolio website. It includes a personal introduction,
+ * social media links, animated visual elements, and key statistics.
+ */
+
 "use client";
 
 import { motion } from "framer-motion";
@@ -8,11 +14,32 @@ import { FaXTwitter } from "react-icons/fa6";
 import { ScrollProgress } from "./shared/scroll-progress";
 import Link from "next/link";
 
+/**
+ * @constant {Array<{label: string, value: string, icon: React.ComponentType}>} stats
+ * @description Array of statistics to be displayed in the hero section
+ */
 const stats = [
   { label: "Years Experience", value: "3+", icon: Briefcase },
   { label: "Projects Completed", value: "15+", icon: Code2 },
   { label: "Technologies", value: "20+", icon: Cpu },
 ];
+
+/**
+ * @component HeroSection
+ * @description The main hero section component that serves as the landing page's primary content.
+ * It includes:
+ * - Personal introduction with animated entrance
+ * - Social media links
+ * - Animated visual elements
+ * - Key statistics with icons
+ * 
+ * @returns {JSX.Element} The rendered hero section component
+ * 
+ * @example
+ * ```tsx
+ * <HeroSection />
+ * ```
+ */
 const HeroSection = () => {
   return (
     <div className="relative min-h-[calc(100vh-4rem)] w-full bg-transparent">

@@ -1,3 +1,9 @@
+/**
+ * @file contact-form.tsx
+ * @description A contact form component that handles user input and sends emails using server actions.
+ * Includes form validation, loading states, and success/error messages.
+ */
+
 "use client";
 
 import { useRef, useState } from "react";
@@ -7,6 +13,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { sendEmail } from "@/app/actions/send-mail";
 
+/**
+ * @component SubmitButton
+ * @description A submit button component that shows loading state while the form is being submitted.
+ * Uses React's useFormStatus hook to track form submission state.
+ * 
+ * @returns {JSX.Element} A button component with loading state
+ */
 function SubmitButton() {
   const { pending } = useFormStatus();
 
@@ -21,10 +34,32 @@ function SubmitButton() {
   );
 }
 
+/**
+ * @component ContactForm
+ * @description A contact form component that handles user input and sends emails.
+ * Features:
+ * - Form validation
+ * - Loading states
+ * - Success/error messages
+ * - Automatic form reset on successful submission
+ * 
+ * @returns {JSX.Element} The rendered contact form component
+ * 
+ * @example
+ * ```tsx
+ * <ContactForm />
+ * ```
+ */
 export function ContactForm() {
   const [message, setMessage] = useState<string>("");
   const formRef = useRef<HTMLFormElement>(null);
 
+  /**
+   * @function handleSubmit
+   * @description Handles the form submission process
+   * @param {FormData} formData - The form data containing user input
+   * @returns {Promise<void>}
+   */
   async function handleSubmit(formData: FormData) {
     const result = await sendEmail(formData);
     setMessage(result.message);
