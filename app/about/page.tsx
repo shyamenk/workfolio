@@ -46,7 +46,7 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          About the Author
+          About
         </motion.h1>
 
         <div className="grid gap-12 md:grid-cols-[300px_1fr]">
@@ -75,10 +75,10 @@ export default function About() {
                 Shyam Kumar
               </h2>
               <p className="text-[#a6e3a1] font-mono font-medium">
-                Full-Stack Developer
+                Full-Stack Developer & Tech Consultant
               </p>
               <p className="text-sm text-[#bac2de] font-mono">
-                Cyber Sapient Technologies
+                Available for Freelance Projects
               </p>
             </div>
 
@@ -122,15 +122,10 @@ export default function About() {
                 transition={{ duration: 0.2 }}
               >
                 <h3 className="flex items-center text-lg font-mono font-medium text-[#a6e3a1]">
-                  Full-Stack Engineer| JavaScript Enthusiast
+                  Full-Stack Development Services | JavaScript Specialist
                 </h3>
                 <p className="text-[#cdd6f4] font-mono leading-relaxed">
-                  Hi there! I&apos;m a passionate Full-Stack Developer with a
-                  keen interest in creating seamless and dynamic web
-                  applications. My toolkit includes JavaScript, TypeScript,
-                  Next.js, React, and Tailwind CSS. I thrive on bringing
-                  innovative ideas to life through code and continuously pushing
-                  the boundaries of web development.
+                  I deliver end-to-end web solutions for businesses and startups, specializing in modern JavaScript frameworks like React, Next.js, and TypeScript. With expertise in both frontend and backend development, I help clients build scalable, performant applications that drive real business results. My approach combines technical excellence with a deep understanding of user experience and business requirements.
                 </p>
               </motion.div>
 
@@ -140,13 +135,10 @@ export default function About() {
                 transition={{ duration: 0.2 }}
               >
                 <h3 className="flex items-center text-lg font-mono font-medium text-[#cba6f7]">
-                  Continuous Learner | AWS & Linux Explorer
+                  Cloud Solutions & DevOps Expertise
                 </h3>
                 <p className="text-[#cdd6f4] font-mono leading-relaxed">
-                  Beyond coding&apos; I&apos;m deeply invested in expanding my
-                  knowledge in AWS and Linux. Whether it&apos;s deploying
-                  scalable applications or mastering the intricacies of server
-                  management, I&apos;m always eager to learn and grow.
+                  Beyond development, I provide comprehensive cloud infrastructure and DevOps services. From AWS deployment strategies to Linux server management, I ensure your applications are not just built right, but deployed and maintained for optimal performance and reliability. I handle everything from initial setup to ongoing maintenance and optimization.
                 </p>
               </motion.div>
 
@@ -156,13 +148,10 @@ export default function About() {
                 transition={{ duration: 0.2 }}
               >
                 <h3 className="flex items-center text-lg font-mono font-medium text-[#f5c2e7]">
-                  What Drives Me?
+                  Why Choose Me?
                 </h3>
                 <p className="text-[#cdd6f4] font-mono leading-relaxed">
-                  Building intuitive and responsive user interfaces, solving
-                  complex problems with elegant solutions, staying ahead of the
-                  curve with the latest tech trends, and collaborating with
-                  like-minded professionals to create amazing products.
+                  I bring a unique blend of technical expertise and business acumen to every project. My commitment to quality, attention to detail, and ability to communicate complex technical concepts clearly sets me apart. I work closely with clients to understand their vision, provide strategic technical guidance, and deliver solutions that exceed expectations while staying within budget and timeline constraints.
                 </p>
               </motion.div>
 
@@ -172,12 +161,10 @@ export default function About() {
                 transition={{ duration: 0.2 }}
               >
                 <h3 className="flex items-center text-lg font-mono font-medium text-[#a6e3a1]">
-                  Let&apos;s Connect!
+                  Ready to Start Your Project?
                 </h3>
                 <p className="text-[#cdd6f4] font-mono leading-relaxed">
-                  I&apos;m always excited to connect with fellow developers,
-                  share knowledge, and collaborate on exciting projects. Feel
-                  free to reach out!
+                  Whether you need a complete web application, technical consultation, or ongoing development support, I'm here to help bring your ideas to life. Let's discuss your project requirements and explore how we can work together to achieve your goals. I'm currently accepting new clients and excited to contribute to your success.
                 </p>
               </motion.div>
             </div>
