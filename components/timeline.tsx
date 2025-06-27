@@ -17,7 +17,7 @@ const experiences: Experience[] = [
     title: "Senior Full Stack Developer",
     company: "CyberSapient Technologies",
     location: "Remote",
-    period: "Feb 2023 - Present",
+    period: "Feb 2024 - Present",
     description: [
       "Led EHR platform development for 10,000+ providers, boosting productivity by 30% with automated workflows.",
       "Built a serverless data pipeline with S3 and Lambda to process and clean CSV data.",
@@ -32,7 +32,7 @@ const experiences: Experience[] = [
     title: "Full Stack Developer",
     company: "Ethernex IT Solution",
     location: "Remote",
-    period: "Jun 2021 - Dec 2023",
+    period: "Jan 2022 - Jan 2024",
     description: [
       "Collaborated with UX designers to implement responsive web designs, increasing mobile user engagement by 45%.",
       "Developed a real-time chat feature using WebSockets and Redis, supporting over 10,000 concurrent users.",
@@ -111,7 +111,10 @@ const ExperienceTimeline: React.FC = () => {
                           className="flex gap-2 text-[#cdd6f4] text-sm"
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.3, delay: index * 0.1 + i * 0.05 }}
+                          transition={{
+                            duration: 0.3,
+                            delay: index * 0.1 + i * 0.05,
+                          }}
                         >
                           <span className="text-[#89b4fa]/70 mt-1">•</span>
                           <span>{item}</span>
