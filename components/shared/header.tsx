@@ -22,12 +22,12 @@ export default function Header() {
     { name: "Contact", path: "/contact" },
   ];
 
-  const handleDownloadCV = () => {
-    const link = document.createElement("a");
-    link.href = "/shyam_kumar_CV.pdf";
-    link.download = "Shyam_Kumar_CV.pdf";
-    link.click();
-  };
+  // const handleDownloadCV = () => {
+  //   const link = document.createElement("a");
+  //   link.href = "/shyam_kumar_CV.pdf";
+  //   link.download = "Shyam_Kumar_CV.pdf";
+  //   link.click();
+  // };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -119,13 +119,13 @@ export default function Header() {
           ))}
         </div>
         {/* Download Button */}
-        <Button
-          onClick={handleDownloadCV}
-          className="hidden gap-2 lg:inline-flex bg-[#a6e3a1] hover:bg-[#f5c2e7] text-[#1e1e2e]"
-        >
-          <Download className="h-4 w-4" />
-          Download CV
-        </Button>{" "}
+        {/* <Button */}
+        {/*   onClick={handleDownloadCV} */}
+        {/*   className="hidden gap-2 lg:inline-flex bg-[#a6e3a1] hover:bg-[#f5c2e7] text-[#1e1e2e]" */}
+        {/* > */}
+        {/*   <Download className="h-4 w-4" /> */}
+        {/*   Download CV */}
+        {/* </Button> */}
       </div>
     </nav>
   );
