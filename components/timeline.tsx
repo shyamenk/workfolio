@@ -19,13 +19,12 @@ const experiences: Experience[] = [
     location: "Remote",
     period: "Feb 2024 - Present",
     description: [
-      "Led EHR platform development for 10,000+ providers, boosting productivity by 30% with automated workflows.",
-      "Built a serverless data pipeline with S3 and Lambda to process and clean CSV data.",
-      "Integrated DrChrono Webhook and AWS SES for data sync and email notifications.",
-      "Built real-time analytics dashboard using Next.js and Shadcn/UI.",
-      "Optimized PostgreSQL query performance by 70% through strategic indexing and partitioning.",
-      "Implemented CI/CD with GitHub Actions and Docker, cutting deployment time to 10 minutes.",
-      "Conducted regular code reviews to ensure high code quality, maintainability, and adherence to best practices.",
+      "Designed and engineered HIPAA-compliant Electronic Health Records platform serving 1,000+ healthcare providers, processing 40,000+ patient records daily with zero security incidents.",
+      "Enhanced PostgreSQL database performance through strategic indexing and partitioning, achieving 40% improvement in query response times.",
+      "Developed automated serverless data pipeline for CSV file processing utilizing AWS Lambda, S3, and CloudFormation with Python SDK.",
+      "Established CI/CD pipelines using GitHub Actions with AWS Fargate ECS and Docker containerization, reducing build and deployment cycles to 8 minutes.",
+      "Integrated DrChrono Webhook and AWS SES for automated data sync and email notifications, reducing manual entry by 75% across 200+ daily notifications.",
+      "Built real-time analytics dashboard using Next.js and Shadcn/UI, delivering 30% faster metric access."
     ],
   },
   {
@@ -34,13 +33,14 @@ const experiences: Experience[] = [
     location: "Remote",
     period: "Jan 2022 - Jan 2024",
     description: [
-      "Collaborated with UX designers to implement responsive web designs, increasing mobile user engagement by 45%.",
-      "Developed a real-time chat feature using WebSockets and Redis, supporting over 10,000 concurrent users.",
-      "Integrated third-party APIs (Stripe, Twilio) to add payment processing and SMS notification features to the platform.",
-      "Implemented automated testing using Jest and Cypress, increasing code coverage from 65% to 90% and reducing bug reports by 35%.",
+      "Implemented responsive web designs using CSS Grid and Flexbox for optimal viewing across desktop, tablet, and mobile devices.",
+      "Collaborated with UI/UX designers to build responsive dashboard for business metrics tracking and daily operations monitoring.",
+      "Built RESTful APIs for e-commerce platform using Node.js with proper error handling, input validation, and rate limiting best practices.",
+      "Optimized MongoDB database performance through strategic indexing, query optimization, and data modeling strategies.",
+      "Developed CSV data parser to automate data collection and database synchronization processes."
     ],
   },
-];
+]
 
 const ExperienceTimeline: React.FC = () => {
   return (
