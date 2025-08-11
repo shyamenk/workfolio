@@ -19,9 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`dark ${jetbrainsMono.variable} font-mono`}>
       <body
-        className={`min-h-screen bg-[#1e1e2e] text-[#cdd6f4] font-mono`}
+        className={`min-h-screen bg-[#1e1e2e] text-[#cdd6f4]`}
       >
         <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <Header />

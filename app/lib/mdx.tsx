@@ -144,7 +144,7 @@ export async function getAllProjects(): Promise<ProjectFrontmatter[]> {
     );
 
     return projects
-      .filter((project): project is ProjectFrontmatter => project !== null)
+      .filter((project): project is ProjectFrontmatter => project !== null && project !== undefined)
       .sort((a, b) => {
         if (a.date && b.date) {
           return new Date(b.date).getTime() - new Date(a.date).getTime();

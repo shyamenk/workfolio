@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
+      },
       typography: {
         DEFAULT: {
           css: {
