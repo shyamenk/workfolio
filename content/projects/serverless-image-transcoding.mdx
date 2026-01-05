@@ -1,9 +1,9 @@
 ---
 slug: serverless-image-transcoding
-title: Serverless Image Transcoding Pipeline - AWS Event-Driven Architecture
-description: Enterprise-grade serverless image transcoding pipeline built with AWS Lambda, S3, CloudFront, and DynamoDB. Automatically processes uploaded images into multiple optimized formats with 99.9% cost optimization through AWS Free Tier utilization.
+title: Serverless Image Transcoding Pipeline – AWS Event-Driven Architecture
+description: Event-driven serverless image processing pipeline on AWS that automatically generates optimized image formats and delivers them globally via CloudFront.
 date: '2025-01-15'
-image: /serverless-transcoding.png
+image: /image-processing.png
 technologies:
   - AWS Lambda
   - Amazon S3
@@ -21,414 +21,209 @@ featured: true
 
 # Serverless Image Transcoding Pipeline
 
-An enterprise-grade, event-driven image processing pipeline that automatically transcodes uploaded images into multiple optimized formats and delivers them via global CDN. This solution demonstrates modern serverless architecture with **99.9% cost optimization** through strategic AWS Free Tier utilization.
+## TL;DR
+
+- **What**: Event-driven serverless image processing pipeline on AWS  
+- **Why**: Optimize image delivery performance while minimizing infrastructure cost  
+- **Scale**: Handles ~1,000 requests/second with 2–5s processing time  
+- **Impact**: ~75% image size reduction and &lt;100ms global delivery  
+- **Cost**: Runs within AWS Free Tier for typical workloads ($0/month)
+
+This project demonstrates **production-grade serverless architecture**, cost-aware engineering, and secure global content delivery using managed AWS services.
+
+---
 
 ## Problem Statement
 
-### 🎯 **Business Challenge**
-Modern web applications face critical image optimization challenges:
-- **Performance Impact**: Large images significantly slow page load times (40% of users abandon sites loading >3 seconds)
-- **Format Compatibility**: Different browsers require different image formats for optimal performance
-- **Storage Costs**: Manual creation and storage of multiple image variants is expensive and labor-intensive  
-- **Global Delivery**: Users worldwide need fast, consistent image access regardless of location
-- **Scalability**: Manual image processing doesn't scale with traffic growth
+Modern web applications face recurring challenges with image delivery at scale:
 
-### 📋 **Technical Requirements**
-- Automatic image processing triggered by upload events
-- Multiple format generation (WebP for modern browsers, JPEG fallbacks)
-- Various size variants (thumbnails, medium, original)
-- Global content delivery with edge caching
-- Cost-effective serverless architecture
-- Real-time processing metadata and analytics
-- Enterprise-grade security and compliance
+- Large images degrade page load times and user experience
+- Different browsers require different image formats for optimal performance
+- Manual image processing does not scale with traffic growth
+- Global users expect low-latency access regardless of region
+- Traditional solutions increase compute and storage costs
 
-## Solution Architecture
+The goal was to design a system that **automatically processes images on upload**, generates optimized variants, and delivers them globally — without managing servers.
 
-### 🏗️ **Event-Driven Workflow**
+---
+
+## Solution Overview
+
+The solution follows an **event-driven, serverless architecture** where image uploads trigger automatic processing and global distribution.
+
+### Key Design Goals
+- Zero manual intervention
+- Horizontal scalability
+- Minimal operational overhead
+- Secure, private storage
+- Cost-efficient execution
+
+---
+
+## Architecture
+
+### Event-Driven Workflow
+
 ```
-┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌──────────────┐
-│   Upload    │───▶│  S3 Trigger  │───▶│   Lambda    │───▶│  Processed   │
-│  (Raw S3)   │    │  (Event)     │    │ (Transcode) │    │   Images     │
-└─────────────┘    └──────────────┘    └─────────────┘    └──────────────┘
-                                              │                     │
-                                              ▼                     ▼
-                                    ┌─────────────────┐    ┌──────────────┐
-                                    │    DynamoDB     │    │  CloudFront  │
-                                    │   (Metadata)    │    │    (CDN)     │
-                                    └─────────────────┘    └──────────────┘
+┌─────────────┐    ┌──────────────┐    ┌─────────────┐
+│ Image Upload│───▶│   S3 Event   │───▶│   Lambda    │
+│ (Raw Bucket)│    │ Notification │    │ Processing │
+└─────────────┘    └──────────────┘    └─────────────┘
+                                              │
+                                              ▼
+                                    ┌─────────────────┐
+                                    │    DynamoDB     │
+                                    │   (Metadata)   │
+                                    └─────────────────┘
+                                              │
+                                              ▼
+                                    ┌─────────────────┐
+                                    │   CloudFront    │
+                                    │     (CDN)       │
+                                    └─────────────────┘
 ```
 
-### ⚡ **Processing Pipeline**
-1. **Image Upload** → S3 Raw Bucket triggers Lambda function via S3 ObjectCreated events
-2. **Parallel Processing** → Sharp library generates multiple formats concurrently:
-   - **WebP Format**: 75% smaller file size, 80% quality for modern browsers
-   - **Thumbnail**: 300x300 max dimensions, 80% quality for fast loading
-   - **Medium Size**: 800x600 max dimensions, 85% quality for detail views
-3. **Intelligent Storage** → Processed images organized in separate S3 bucket with folder structure
-4. **Metadata Tracking** → Compression statistics and processing data saved to DynamoDB
-5. **Global Delivery** → CloudFront CDN serves optimized images from edge locations worldwide
+### Processing Pipeline
 
-## Core Features
+1. Image uploaded to **S3 Raw Bucket**
+2. **S3 ObjectCreated** event triggers Lambda
+3. Lambda processes image using **Sharp**
+4. Multiple optimized variants generated in parallel
+5. Metadata stored in **DynamoDB**
+6. Images delivered globally via **CloudFront CDN**
 
-### 🚀 **Automated Image Processing**
-- **Event-Driven Architecture**: Zero-latency processing triggered by S3 uploads
-- **Parallel Format Generation**: Multiple image variants created simultaneously for optimal performance
-- **Smart Compression**: Format-specific optimization (WebP: 80% quality, JPEG: 85% quality)
-- **Dimension Optimization**: Intelligent resizing with aspect ratio preservation
-- **Batch Processing Support**: Handles multiple image uploads efficiently
+---
 
-### 📊 **Performance Analytics**
-- **Real-time Metrics**: Processing time, compression ratios, and file size statistics
-- **Compression Tracking**: Detailed savings analysis (average 75% reduction with WebP)
-- **Processing History**: Complete audit trail of all image transformations
-- **Error Logging**: Comprehensive error handling with DynamoDB logging for failed operations
-- **Performance Monitoring**: CloudWatch integration for Lambda function metrics
+## Key Capabilities
 
-### 🌐 **Global Content Delivery**
-- **CloudFront CDN**: 400+ global edge locations for &lt;100ms response times
-- **Intelligent Caching**: 1-day default, 1-year maximum TTL for optimal cache hit rates
-- **Origin Access Control**: Secure S3 access without public bucket exposure
-- **HTTPS Enforcement**: All content delivered over encrypted connections
-- **Regional Optimization**: PriceClass_100 (North America, Europe) for cost efficiency
+### Image Processing
+- Event-driven Lambda execution
+- Parallel generation of WebP and JPEG formats
+- Intelligent resizing with aspect ratio preservation
+- Multiple size variants (thumbnail, medium, original)
 
-### 🔒 **Enterprise Security**
-- **Least Privilege IAM**: Lambda execution role with minimal required permissions
-- **Private S3 Buckets**: No public access, CloudFront OAC-only access model
-- **Encrypted Storage**: Server-side encryption (AES-256) for all stored images
-- **Secure API Communication**: AWS SDK v3 with signature v4 authentication
-- **Audit Trail**: Complete API call logging via CloudTrail integration
+### Performance & Delivery
+- CloudFront CDN with global edge locations
+- Optimized caching (1 day default, 1 year max TTL)
+- Edge delivery under 100ms for cached assets
+- Average 75% image size reduction with WebP
 
-## Technical Implementation
+### Security
+- No public S3 buckets (OAC-only access)
+- Least-privilege IAM roles
+- Encrypted storage (AES-256)
+- HTTPS-only delivery
+- Full audit logging via CloudTrail
 
-### **AWS Services Architecture**
+---
 
-| Service | Purpose | Configuration | Cost Optimization |
-|---------|---------|---------------|-------------------|
-| **AWS Lambda** | Image processing compute | Node.js 18.x, 1024MB memory, 5min timeout | Free Tier: 1M requests, 400K GB-seconds |
-| **Amazon S3** | Raw + processed storage | Two-bucket architecture with lifecycle policies | Free Tier: 5GB storage, 20K GET requests |
-| **DynamoDB** | Processing metadata | On-demand billing, imageId partition key | Free Tier: 25GB storage, 25 RCU/WCU |
-| **CloudFront** | Global CDN delivery | OAC security, intelligent caching behaviors | Free Tier: 50GB data transfer out |
-| **CloudFormation** | Infrastructure as Code | Complete stack automation with parameters | No additional charges |
+## Results & Impact
 
-### **Core Processing Logic**
+### Performance Metrics
 
-```javascript
-// Lambda Function: Parallel Image Processing
+| Metric | Result |
+|------|-------|
+| Image Processing Time | 2–5 seconds |
+| Compression Reduction | ~75% |
+| CDN Response Time | &lt;100ms |
+| Concurrent Requests | ~1,000/sec |
+| Availability | 99.9% |
+
+### Cost Optimization
+
+The entire system operates within **AWS Free Tier limits** for typical usage:
+
+```
+Lambda        : $0.00
+S3 Storage    : $0.00
+DynamoDB      : $0.00
+CloudFront   : $0.00
+----------------------
+Total         : $0.00 / month
+```
+
+---
+
+## Technical Implementation (Optional Deep Dive)
+
+<details>
+<summary><strong>Core Lambda Processing Logic</strong></summary>
+
+```js
 exports.handler = async (event) => {
   for (const record of event.Records) {
-    const { bucket, key } = record.s3;
-    
-    // Download original image with AWS SDK v3
-    const imageBuffer = await downloadImage(bucket.name, key);
-    const originalSize = imageBuffer.length;
-    
-    // Parallel format generation for optimal performance
-    const [webpBuffer, thumbnailBuffer, mediumBuffer] = await Promise.all([
-      // WebP: 75% smaller, modern browsers
+    const imageBuffer = await downloadImage(
+      record.s3.bucket.name,
+      record.s3.object.key
+    );
+
+    const [webp, thumb, medium] = await Promise.all([
       sharp(imageBuffer).webp({ quality: 80 }).toBuffer(),
-      
-      // Thumbnail: 300x300 max, fast loading
       sharp(imageBuffer)
-        .resize(300, 300, { fit: 'inside', withoutEnlargement: true })
-        .jpeg({ quality: 80 }).toBuffer(),
-      
-      // Medium: 800x600 max, detail view
+        .resize(300, 300, { fit: 'inside' })
+        .jpeg({ quality: 80 })
+        .toBuffer(),
       sharp(imageBuffer)
-        .resize(800, 600, { fit: 'inside', withoutEnlargement: true })
-        .jpeg({ quality: 85 }).toBuffer()
+        .resize(800, 600, { fit: 'inside' })
+        .jpeg({ quality: 85 })
+        .toBuffer()
     ]);
-    
-    // Upload all variants with organized folder structure
-    await uploadProcessedImages([
-      { Key: `webp/${baseName}.webp`, Body: webpBuffer },
-      { Key: `thumbnails/${baseName}_thumb.jpg`, Body: thumbnailBuffer },
-      { Key: `medium/${baseName}_medium.jpg`, Body: mediumBuffer }
-    ]);
-    
-    // Save comprehensive processing metadata
-    await saveProcessingMetadata({
-      imageId: key,
-      originalSize,
-      compressionSavings: calculateSavings(originalSize, webpBuffer.length),
-      processingTime: Date.now() - startTime,
-      formats: { webp, thumbnail, medium }
-    });
+
+    await uploadVariants({ webp, thumb, medium });
+    await saveMetadata();
   }
 };
 ```
 
-### **Infrastructure as Code**
+</details>
 
-**CloudFormation Template Highlights:**
-```yaml
-# Deployment Order with Dependencies
-Resources:
-  # 1. IAM Execution Role (Least Privilege)
-  LambdaExecutionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      ManagedPolicyArns: [AWSLambdaBasicExecutionRole]
-      Policies: [S3Access, DynamoDBAccess]
-  
-  # 2. DynamoDB Metadata Table
-  ImageMetadataTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      BillingMode: PAY_PER_REQUEST
-      AttributeDefinitions: [{ AttributeName: imageId, AttributeType: S }]
-  
-  # 3. Sharp Lambda Layer (Docker-built)
-  SharpLayer:
-    Type: AWS::Lambda::LayerVersion
-    Properties:
-      CompatibleRuntimes: [nodejs18.x]
-      Content: { S3Bucket: !Ref LayerBucket }
-  
-  # 4. Lambda Function (External Code)
-  ImageProcessorFunction:
-    Type: AWS::Lambda::Function
-    Properties:
-      Runtime: nodejs18.x
-      MemorySize: 1024
-      Timeout: 300
-      Layers: [!Ref SharpLayer]
-      Environment:
-        Variables:
-          PROCESSED_BUCKET: !Sub "${ProjectName}-processed-${AWS::AccountId}"
-  
-  # 5. S3 Buckets with Event Notifications
-  RawImagesBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      NotificationConfiguration:
-        LambdaConfigurations:
-          - Event: "s3:ObjectCreated:*"
-            Function: !GetAtt ImageProcessorFunction.Arn
-  
-  # 6. Origin Access Control (OAC)
-  OriginAccessControl:
-    Type: AWS::CloudFront::OriginAccessControl
-    Properties:
-      SigningBehavior: always
-      SigningProtocol: sigv4
-  
-  # 7. CloudFront Distribution
-  ImageCDN:
-    Type: AWS::CloudFront::Distribution
-    Properties:
-      DistributionConfig:
-        Origins:
-          - S3OriginConfig: { OriginAccessIdentity: "" }
-            OriginAccessControlId: !Ref OriginAccessControl
-        DefaultCacheBehavior:
-          ViewerProtocolPolicy: redirect-to-https
-          DefaultTTL: 86400
-```
+<details>
+<summary><strong>Infrastructure as Code</strong></summary>
 
-## Key Technical Achievements
+- CloudFormation-managed stack
+- Parameterized environments
+- Automated resource dependency ordering
+- Docker-built Lambda layer for Sharp binaries
 
-### **Performance Metrics**
-| Metric | Achievement | Industry Standard |
-|--------|-------------|-------------------|
-| **Processing Time** | 2-5 seconds | 10-30 seconds (traditional) |
-| **Compression Ratio** | 75% reduction | 30-50% (typical) |
-| **Global Delivery** | &lt;100ms | &lt;200ms (target) |
-| **Concurrent Processing** | 1000 requests/second | 100-500 (traditional) |
-| **Uptime** | 99.9% availability | 99.5% (industry average) |
-
-### **Cost Optimization Results**
-```
-Monthly Cost Breakdown (AWS Free Tier):
-┌─────────────┬──────────────┬─────────────┬──────────┐
-│ Service     │ Usage        │ Free Limit  │ Cost     │
-├─────────────┼──────────────┼─────────────┼──────────┤
-│ Lambda      │ 50K requests │ 1M requests │ $0.00    │
-│ S3 Storage  │ 2GB          │ 5GB         │ $0.00    │
-│ DynamoDB    │ 1K ops       │ 25 WCU/RCU  │ $0.00    │
-│ CloudFront  │ 10GB transfer│ 50GB        │ $0.00    │
-├─────────────┼──────────────┼─────────────┼──────────┤
-│ TOTAL       │              │             │ $0.00/mo │
-└─────────────┴──────────────┴─────────────┴──────────┘
-```
-
-### **Security Implementation**
-- ✅ **Zero Trust Architecture**: No public S3 buckets, OAC-only access
-- ✅ **Encryption Everywhere**: AES-256 storage encryption, HTTPS transport
-- ✅ **Least Privilege IAM**: Minimal required permissions per service
-- ✅ **Audit Compliance**: Complete CloudTrail API logging
-- ✅ **Input Validation**: Comprehensive file type and size validation
-
-### **Developer Experience**
-- ✅ **One-Command Deployment**: Automated scripts for complete stack deployment  
-- ✅ **Environment Agnostic**: Parameterized CloudFormation for multiple environments
-- ✅ **Monitoring Ready**: CloudWatch dashboards and alerting pre-configured
-- ✅ **Documentation Complete**: Architecture diagrams and deployment guides
-- ✅ **Version Control**: Git-based deployment with tagged releases
-
-## Deployment Architecture
-
-### **Automated Build Process**
-```bash
-# 1. Sharp Layer Build (Docker-based)
-./scripts/build-layer.sh img-pipeline us-east-1
-# - Creates Linux x64 Sharp binaries
-# - Packages Node.js dependencies  
-# - Uploads to S3 layer bucket
-
-# 2. Lambda Function Packaging
-./scripts/build-lambda.sh img-pipeline
-# - Installs production dependencies
-# - Creates deployment zip
-# - Uploads to deployment bucket
-
-# 3. Infrastructure Deployment
-./scripts/deploy-stack.sh img-pipeline us-east-1
-# - Validates CloudFormation template
-# - Creates/updates complete stack
-# - Outputs service endpoints and test commands
-```
-
-### **Resource Dependencies**
-The deployment follows a carefully orchestrated sequence:
-1. **IAM Role** → Security foundation with least privilege access
-2. **DynamoDB Table** → Metadata storage with on-demand scaling  
-3. **Lambda Layer** → Sharp image processing library distribution
-4. **Lambda Function** → Core processing logic with environment configuration
-5. **Lambda Permission** → S3 service invoke authorization
-6. **S3 Buckets** → Raw and processed image storage with event triggers
-7. **Origin Access Control** → Secure CloudFront → S3 integration
-8. **Bucket Policy** → CloudFront service principal access
-9. **CloudFront Distribution** → Global CDN with caching optimization
-
-## Challenges Overcome
-
-### **Challenge 1: AWS SDK Compatibility**
-**Problem**: Node.js 18.x runtime doesn't include AWS SDK v2
-```javascript
-// Error: Cannot find module 'aws-sdk'
-```
-**Solution**: Complete migration to AWS SDK v3 with modern architecture
-```javascript
-// Before (SDK v2)
-const AWS = require('aws-sdk');
-const s3 = new AWS.S3();
-
-// After (SDK v3) - Modular, tree-shakeable
-const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
-const s3 = new S3Client();
-```
-**Impact**: 40% bundle size reduction, better tree-shaking, improved cold start performance
-
-### **Challenge 2: CloudFront Access Control**
-**Problem**: 403 Forbidden errors when accessing processed images via CDN
-**Solution**: Implemented Origin Access Control (OAC) replacing legacy OAI
-```yaml
-ProcessedImagesBucketPolicy:
-  Statement:
-    - Effect: Allow
-      Principal: { Service: cloudfront.amazonaws.com }
-      Action: s3:GetObject
-      Condition:
-        StringEquals:
-          "AWS:SourceArn": !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/*"
-```
-**Impact**: Secure CDN access without public S3 buckets, meeting enterprise security standards
-
-### **Challenge 3: Sharp Layer Compilation**
-**Problem**: Sharp native binaries incompatible between development (macOS) and production (Lambda Linux)
-**Solution**: Docker-based layer building for correct architecture
-```dockerfile
-FROM public.ecr.aws/lambda/nodejs:18
-COPY package.json ./
-RUN npm install --only=production --platform=linux --arch=x64
-```
-**Impact**: Cross-platform compatibility, consistent production deployments
-
-### **Challenge 4: Concurrent Processing Optimization**
-**Problem**: Sequential image processing causing timeouts with large files
-**Solution**: Promise.all parallel processing with memory optimization
-```javascript
-// Parallel processing reduces total time by 60%
-const [webpBuffer, thumbnailBuffer, mediumBuffer] = await Promise.all([
-  generateWebP(imageBuffer),
-  generateThumbnail(imageBuffer), 
-  generateMedium(imageBuffer)
-]);
-```
-**Impact**: 60% reduction in processing time, improved Lambda cost efficiency
-
-## Future Enhancements
-
-### **Phase 1: Intelligence Integration**
-- [ ] **AI-Powered Optimization**: Amazon Rekognition for smart cropping and content-aware resizing
-- [ ] **Format Detection**: Automatic optimal format selection based on image content
-- [ ] **Quality Adaptation**: ML-based quality adjustment for optimal file size vs. visual quality
-- [ ] **Metadata Extraction**: EXIF data processing for enhanced image analytics
-
-### **Phase 2: Advanced Processing**
-- [ ] **Video Transcoding**: Extend pipeline for MP4 → WebM, thumbnail extraction
-- [ ] **Advanced Formats**: AVIF, WebP 2.0 support for next-generation compression
-- [ ] **Progressive Loading**: Multi-resolution pyramid generation for progressive enhancement
-- [ ] **Watermarking**: Dynamic watermark application with configurable templates
-
-### **Phase 3: Platform Integration**
-- [ ] **API Gateway**: RESTful API for programmatic upload and management
-- [ ] **Real-time Notifications**: WebSocket notifications via API Gateway for processing status
-- [ ] **Admin Dashboard**: React-based management interface for pipeline monitoring
-- [ ] **Webhook Integration**: External system notifications for completed processing
-
-### **Phase 4: Enterprise Features**
-- [ ] **Multi-Region Deployment**: Cross-region replication for disaster recovery
-- [ ] **SQS Integration**: Message queue decoupling for enterprise-scale processing
-- [ ] **Step Functions**: Complex workflow orchestration for advanced processing chains
-- [ ] **ECS/Fargate**: Container-based processing for specialized workloads
-
-## Development Process
-
-### **Architecture Principles**
-- **Cloud-Native Design**: Leveraging managed services for operational excellence
-- **Event-Driven Architecture**: Loose coupling for scalability and maintainability
-- **Infrastructure as Code**: Complete environment reproducibility
-- **Security by Design**: Zero-trust architecture with defense in depth
-- **Cost Optimization**: Strategic Free Tier utilization for maximum value
-
-### **Quality Assurance**
-- **Comprehensive Testing**: Unit tests for Lambda functions, integration tests for workflows
-- **Security Auditing**: Regular security assessments and compliance validation
-- **Performance Monitoring**: Real-time metrics and alerting for SLA maintenance
-- **Documentation Standards**: Complete technical documentation and runbooks
-
-### **Operational Excellence**
-- **Monitoring & Alerting**: CloudWatch dashboards with proactive alerting
-- **Automated Deployment**: CI/CD pipelines with blue-green deployment
-- **Disaster Recovery**: Multi-AZ deployment with automated backups
-- **Cost Management**: Resource tagging and cost allocation tracking
-
-## Business Impact
-
-### **Quantifiable Results**
-- ✅ **40% faster page loads** through WebP format adoption and global CDN
-- ✅ **60% bandwidth reduction** via intelligent compression algorithms
-- ✅ **99.9% uptime** with serverless, managed service architecture
-- ✅ **Global reach** through CloudFront's 400+ edge locations
-- ✅ **Zero operational overhead** with fully managed, event-driven processing
-- ✅ **Enterprise-grade security** meeting compliance requirements
-
-### **Technical Excellence**
-This serverless image transcoding pipeline demonstrates:
-- **Modern Cloud Architecture**: Event-driven, serverless design patterns
-- **Cost Engineering**: 99.9% cost reduction through strategic Free Tier optimization  
-- **DevOps Best Practices**: Infrastructure as Code with automated deployment
-- **Performance Engineering**: Sub-second processing with global delivery
-- **Security Implementation**: Zero-trust architecture with comprehensive audit trails
-
-**Portfolio Highlights:**
-✅ **Production-Ready Architecture** with enterprise security standards  
-✅ **Comprehensive Documentation** with architecture diagrams and deployment guides  
-✅ **Cost-Optimized Design** running at $0/month within AWS Free Tier limits  
-✅ **Scalable Infrastructure** supporting 1000+ concurrent requests  
-✅ **Global Performance** with &lt;100ms response times worldwide  
+</details>
 
 ---
 
-*Built with modern serverless technologies demonstrating cloud architecture expertise, cost optimization strategies, and enterprise-grade security implementation.*
+## Challenges & Solutions
+
+### Sharp Binary Compatibility
+**Problem**: Native Sharp binaries incompatible between macOS and Lambda Linux  
+**Solution**: Docker-based Lambda layer builds  
+**Impact**: Reliable cross-platform deployments
+
+### CloudFront Access Control
+**Problem**: 403 errors with private S3 origins  
+**Solution**: Origin Access Control (OAC)  
+**Impact**: Secure CDN access without public buckets
+
+### Lambda Performance
+**Problem**: Sequential processing caused timeouts  
+**Solution**: Parallel processing with Promise.all  
+**Impact**: ~60% reduction in execution time
+
+---
+
+## Future Improvements
+
+- AVIF and next-gen image format support
+- API Gateway for programmatic uploads
+- Admin dashboard for monitoring and analytics
+- Step Functions for advanced workflows
+- SQS-based decoupling for higher throughput
+
+---
+
+## Why This Project Matters
+
+This project demonstrates my ability to:
+
+- Design **production-grade serverless systems**
+- Optimize for **performance and cost simultaneously**
+- Apply **security-first cloud architecture**
+- Own systems end-to-end — from design to deployment
+

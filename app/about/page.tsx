@@ -27,7 +27,7 @@ const socialLinks = [
   {
     name: "Email",
     icon: <AiFillMail className="h-5 w-5" />,
-    href: "mailto:shyamenk@email.com",
+    href: "mailto:shyamenk@gmail.com",
   },
 ];
 
@@ -46,11 +46,11 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          About
+          About Me
         </motion.h1>
 
         <div className="grid gap-12 md:grid-cols-[300px_1fr]">
-          {/* Left Column - Profile */}
+          {/* Left Column */}
           <motion.div
             className="space-y-8"
             initial={{ opacity: 0, x: -20 }}
@@ -60,11 +60,10 @@ export default function About() {
             <motion.div
               className="relative mx-auto w-64 h-64 overflow-hidden rounded-full ring-4 ring-[#cba6f7]/20"
               whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.2 }}
             >
               <Image
                 src="/avatar.png"
-                alt="Profile picture"
+                alt="Shyam Kumar"
                 fill
                 className="object-cover"
               />
@@ -75,32 +74,23 @@ export default function About() {
                 Shyam Kumar
               </h2>
               <p className="text-[#a6e3a1] font-mono font-medium">
-                Full-Stack Developer & Tech Consultant
+                Backend-Heavy Full-Stack Developer
               </p>
               <p className="text-sm text-[#bac2de] font-mono">
-                Available for Freelance Projects
+                Open to Full-Time Roles • Remote / India
               </p>
             </div>
 
             <div className="flex justify-center space-x-4">
               {socialLinks.map((link) => (
-                <motion.div
-                  key={link.name}
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Link
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                <motion.div key={link.name} whileHover={{ scale: 1.1 }}>
+                  <Link href={link.href} target="_blank">
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-11 w-11 rounded-full border border-[#cba6f7]/20 bg-[#45475a]/50 text-[#cdd6f4] hover:bg-[#cba6f7]/10 hover:text-[#cba6f7] hover:border-[#cba6f7]/40"
+                      className="h-11 w-11 rounded-full border border-[#cba6f7]/20 bg-[#45475a]/50 text-[#cdd6f4] hover:bg-[#cba6f7]/10 hover:text-[#cba6f7]"
                     >
                       {link.icon}
-                      <span className="sr-only">{link.name}</span>
                     </Button>
                   </Link>
                 </motion.div>
@@ -108,7 +98,7 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Right Column - Content */}
+          {/* Right Column */}
           <motion.div
             className="space-y-8"
             initial={{ opacity: 0, x: 20 }}
@@ -116,57 +106,50 @@ export default function About() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <div className="space-y-8">
-              <motion.div
-                className="space-y-2"
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                <h3 className="flex items-center text-lg font-mono font-medium text-[#a6e3a1]">
-                  Full-Stack Development Services | JavaScript Specialist
+              <div>
+                <h3 className="text-lg font-mono font-medium text-[#a6e3a1]">
+                  Who I Am
                 </h3>
                 <p className="text-[#cdd6f4] font-mono leading-relaxed">
-                  I deliver end-to-end web solutions for businesses and startups, specializing in modern JavaScript frameworks like React, Next.js, and TypeScript. With expertise in both frontend and backend development, I help clients build scalable, performant applications that drive real business results. My approach combines technical excellence with a deep understanding of user experience and business requirements.
+                  I’m a full-stack developer with a strong backend focus, working
+                  primarily with Node.js, Python, PostgreSQL, and AWS to build
+                  scalable, production-grade web applications.
                 </p>
-              </motion.div>
+              </div>
 
-              <motion.div
-                className="space-y-2"
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                <h3 className="flex items-center text-lg font-mono font-medium text-[#cba6f7]">
-                  Cloud Solutions & DevOps Expertise
+              <div>
+                <h3 className="text-lg font-mono font-medium text-[#cba6f7]">
+                  What I Work On
                 </h3>
                 <p className="text-[#cdd6f4] font-mono leading-relaxed">
-                  Beyond development, I provide comprehensive cloud infrastructure and DevOps services. From AWS deployment strategies to Linux server management, I ensure your applications are not just built right, but deployed and maintained for optimal performance and reliability. I handle everything from initial setup to ongoing maintenance and optimization.
+                  Over the last 4+ years, I’ve worked on healthcare and logistics
+                  platforms where reliability, performance, and security are
+                  critical. I build APIs, design backend architectures, optimize
+                  databases, and ship features end-to-end.
                 </p>
-              </motion.div>
+              </div>
 
-              <motion.div
-                className="space-y-2"
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                <h3 className="flex items-center text-lg font-mono font-medium text-[#f5c2e7]">
-                  Why Choose Me?
+              <div>
+                <h3 className="text-lg font-mono font-medium text-[#f5c2e7]">
+                  How I Think as an Engineer
                 </h3>
                 <p className="text-[#cdd6f4] font-mono leading-relaxed">
-                  I bring a unique blend of technical expertise and business acumen to every project. My commitment to quality, attention to detail, and ability to communicate complex technical concepts clearly sets me apart. I work closely with clients to understand their vision, provide strategic technical guidance, and deliver solutions that exceed expectations while staying within budget and timeline constraints.
+                  I care deeply about trade-offs. I don’t just ask whether
+                  something can be built — I think about maintainability, cost,
+                  scalability, and how systems behave in production.
                 </p>
-              </motion.div>
+              </div>
 
-              <motion.div
-                className="space-y-2"
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                <h3 className="flex items-center text-lg font-mono font-medium text-[#a6e3a1]">
-                  Ready to Start Your Project?
+              <div>
+                <h3 className="text-lg font-mono font-medium text-[#a6e3a1]">
+                  What I’m Looking For
                 </h3>
                 <p className="text-[#cdd6f4] font-mono leading-relaxed">
-                  Whether you need a complete web application, technical consultation, or ongoing development support, I&apos;m here to help bring your ideas to life. Let&apos;s discuss your project requirements and explore how we can work together to achieve your goals. I&apos;m currently accepting new clients and excited to contribute to your success.
+                  I’m currently looking for full-stack or backend-heavy roles
+                  where I can take ownership of systems, work on meaningful
+                  products, and continue growing as an engineer.
                 </p>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>
