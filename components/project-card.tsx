@@ -64,18 +64,21 @@ export default function ProjectCard({
   featured = false,
 }: ProjectCardProps) {
   return (
-    <Link href={`/projects/${slug}`}>
+    <Link href={`/projects/${slug}`} className="h-full">
       <Card
         className={`
-        group relative overflow-hidden border-0 
+        group relative overflow-hidden border-0
         bg-gradient-to-br from-[#313244] to-[#181825]
         backdrop-blur-sm transition-all duration-300
         hover:shadow-[0_0_40px_rgba(203,166,247,0.15)]
+        flex flex-col h-full
         ${featured ? "lg:col-span-2" : ""}
       `}
       >
         <div className="absolute inset-0.5 rounded-lg " />
-        <div className={`relative ${featured ? "h-80" : "h-64"} overflow-hidden bg-[#1e1e2e] rounded-t-lg`}>
+
+        {/* Image Container - Fixed Height */}
+        <div className="relative w-full h-52 flex-shrink-0 overflow-hidden bg-[#1e1e2e] rounded-t-lg">
           <Image
             src={image || "/placeholder.svg"}
             alt={title}
@@ -85,29 +88,56 @@ export default function ProjectCard({
             priority={featured}
           />
         </div>
-        <CardHeader className="relative z-10 p-5 pb-0">
-          <CardTitle className="text-2xl font-mono font-bold text-[#cdd6f4] mb-2 tracking-tight truncate line-clamp-1">
-            {title}
-          </CardTitle>
-          <div className="flex flex-wrap gap-2 mb-3">
-            {technologies.slice(0, 3).map((tech) => (
-              <Badge
-                key={tech}
-                variant="secondary"
-                className="bg-[#cba6f7]/20 text-[#cba6f7] border border-[#cba6f7]/30 font-mono"
+
+        {/* Content Container - Flex Grow */}
+        <div className="flex flex-col flex-1 justify-between">
+          <div>
+            <CardHeader className="relative z-10 p-5 pb-3">
+              <CardTitle className="text-xl font-mono font-bold text-[#cdd6f4] mb-3 tracking-tight line-clamp-2 min-h-[3.5rem]">
+                {title}
+              </CardTitle>
+              <div className="flex flex-wrap gap-2">
+                {technologies.slice(0, 3).map((tech) => (
+                  <Badge
+                    key={tech}
+                    variant="secondary"
+                    className="bg-[#cba6f7]/20 text-[#cba6f7] border border-[#cba6f7]/30 font-mono text-xs px-2 py-0.5"
+                  >
+                    {tech}
+                  </Badge>
+                ))}
+                {technologies.length > 3 && (
+                  <Badge
+                    variant="secondary"
+                    className="bg-[#cba6f7]/20 text-[#cba6f7] border border-[#cba6f7]/30 font-mono text-xs px-2 py-0.5"
+                  >
+                    +{technologies.length - 3}
+                  </Badge>
+                )}
+              </div>
+            </CardHeader>
+
+            <CardContent className="relative z-10 px-5 pb-3">
+              <p
+                className="text-[#cdd6f4]/90 text-sm leading-relaxed font-mono overflow-hidden h-[4.5rem]"
+                style={{
+                  display: '-webkit-box',
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: 'vertical'
+                }}
               >
-                {tech}
-              </Badge>
-            ))}
+                {description}
+              </p>
+            </CardContent>
           </div>
-        </CardHeader>
-        <CardContent className="relative z-10 p-5 pt-3">
-          <p className="text-[#cdd6f4] mb-4 leading-relaxed font-mono line-clamp-3">{description}</p>
-          <div className="flex items-center text-[#a6e3a1] font-mono font-medium group-hover:text-[#cba6f7] transition-colors">
-            View Project
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </div>
-        </CardContent>
+
+          <CardContent className="relative z-10 px-5 pb-5 pt-0">
+            <div className="flex items-center text-[#a6e3a1] font-mono text-sm font-medium group-hover:text-[#cba6f7] transition-colors">
+              View Project
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </div>
+          </CardContent>
+        </div>
       </Card>
     </Link>
   );

@@ -41,11 +41,9 @@ export default async function ProjectPage() {
             </h2>
             <div className="h-[1px] flex-1 mx-8 bg-gradient-to-r from-[#f5c2e7]/50 to-transparent" />
           </div>
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-8 md:auto-rows-[1fr]">
             {projects.map((project) => (
-              <div key={project.slug}>
-                <ProjectCard {...project} />
-              </div>
+              <ProjectCard key={project.slug} {...project} />
             ))}
           </div>
         </section>
