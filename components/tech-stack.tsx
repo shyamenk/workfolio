@@ -6,6 +6,10 @@ import {
   SiTailwindcss,
   SiMongodb,
   SiFastapi,
+  SiOpenai,
+  SiAnthropic,
+  SiLangchain,
+  SiHuggingface,
 } from "react-icons/si";
 import {
   FaReact,
@@ -19,6 +23,7 @@ import {
 import { TbBrandNextjs } from "react-icons/tb";
 import { BiLogoPostgresql } from "react-icons/bi";
 import { DiRedis } from "react-icons/di";
+import { Bot, FileSearch, Workflow, Database, Plug2 } from "lucide-react";
 
 const technologies = [
   { name: "React", icon: FaReact, color: "text-blue-400" },
@@ -34,6 +39,15 @@ const technologies = [
   { name: "Python", icon: FaPython, color: "text-sky-500" },
   { name: "Redis", icon: DiRedis, color: "text-red-500" },
   { name: "FastAPI", icon: SiFastapi, color: "text-green-500" },
+  { name: "OpenAI", icon: SiOpenai, color: "text-emerald-500" },
+  { name: "LangChain", icon: SiLangchain, color: "text-green-400" },
+  { name: "LangGraph", icon: Workflow, color: "text-indigo-400" },
+  { name: "Hugging Face", icon: SiHuggingface, color: "text-yellow-400" },
+  { name: "Anthropic", icon: SiAnthropic, color: "text-orange-300" },
+  { name: "LLMs", icon: Bot, color: "text-purple-400" },
+  { name: "RAG", icon: FileSearch, color: "text-blue-400" },
+  { name: "Chroma", icon: Database, color: "text-cyan-400" },
+  { name: "MCP", icon: Plug2, color: "text-pink-400" },
   { name: "Linux", icon: FaLinux, color: "text-yellow-500" },
 ];
 

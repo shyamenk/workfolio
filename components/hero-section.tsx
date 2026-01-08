@@ -17,8 +17,8 @@ import Link from "next/link";
  * Key credibility stats aligned with resume & portfolio
  */
 const stats = [
-  { label: "Years Experience", value: "4+", icon: Briefcase },
-  { label: "Production Projects", value: "15+", icon: Code2 },
+  { label: "Years Experience", value: "4", icon: Briefcase },
+  { label: "Production Projects", value: "10+", icon: Code2 },
   { label: "Technologies Used", value: "20+", icon: Cpu },
 ];
 
@@ -80,7 +80,7 @@ const HeroSection = () => {
                 </Button>
               </Link>
 
-              <Link href="/resume/Shyam_Kumar_FullStack_Developer_4Y.pdf">
+              <Link href="/shyam_fullstack_2026.pdf">
                 <Button
                   size="lg"
                   variant="outline"

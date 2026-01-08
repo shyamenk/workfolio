@@ -24,7 +24,7 @@ const testimonials = [
   {
     name: "Nitin O V",
     role: "Team Lead CMS",
-    company: "White Rabbit",
+    company: "Evolve",
     image: "/images/nithin.jpeg",
     quote: "Shyam's expertise in full-stack development and his ability to quickly adapt to new technologies made him an invaluable team member.",
     companyLogo: "/images/white_rabbit.jpeg"
